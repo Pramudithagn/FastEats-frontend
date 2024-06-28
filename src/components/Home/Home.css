@@ -1,0 +1,14 @@
+.banner{
+    background-image: url(https://img.freepik.com/free-photo/top-view-fast-food-mix-hamburger-doner-sandwich-chicken-nuggets-rice-vegetable-salad-chicken-sticks-caesar-salad-mushrooms-pizza-chicken-ragout-french-fries-mayo_141793-3997.jpg?t=st=1719593691~exp=1719597291~hmac=187350b15a431fa9f5a0f27109481cb342cce7f1a56850eaa9a4f2e60b60a45c&w=1480);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 90vh;
+}
+
+.cover{
+    width: 100%;
+    height: 90vh;
+    background-color: black;
+    opacity: 0.4;
+}
