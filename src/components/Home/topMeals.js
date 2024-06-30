@@ -1,0 +1,34 @@
+export const topMeals=[
+    {
+        image:"https://cdn.pixabay.com/photo/2021/06/08/01/30/kottu-6319363_1280.jpg",
+        title:"Koththu"
+    },
+    {
+        image:"https://img.freepik.com/free-photo/pizza-pizza-filled-with-tomatoes-salami-olives_140725-1200.jpg?t=st=1719594144~exp=1719597744~hmac=11d0fb01d945ef3b62edabd76770562c4df3ce62fa86dffd95e514cecae62d71&w=740",
+        title:"Pizza"
+    },
+    {
+        image:"https://img.freepik.com/free-photo/top-view-delicious-noodles-concept_23-2148773775.jpg?t=st=1719595151~exp=1719598751~hmac=401c3a8c52261c69abb7a5f61fd535c2fe4ee2fe7004bbb7e01c75d873be6a4f&w=900",
+        title:"Noodles"
+    },
+    {
+        image:"https://img.freepik.com/free-photo/side-view-shish-kebab-skewers-with-tomato-paper-ayran-white-plate_176474-3220.jpg?t=st=1719596016~exp=1719599616~hmac=3b8d32e46899851f5ce33219b8cd8e4188c3cdf05e536c4787063a2187dadc7c&w=740",
+        title:"Grilled"
+    },
+    {
+        image:"https://img.freepik.com/free-photo/burger-hamburger-cheeseburger_505751-3697.jpg?t=st=1719595206~exp=1719598806~hmac=0303a5690934f925339b06f85a93245c4bdd20cba2ebf74dfce354fe577abeeb&w=740",
+        title:"Burger"
+    },
+    {
+        image:"https://img.freepik.com/free-photo/appetizing-healthy-rice-with-vegetables-white-plate-wooden-table_2829-19773.jpg?t=st=1719595392~exp=1719598992~hmac=d5bf6ba32b3c27a311b5b4103bf45662a3ad4f475c7a126032ade1a4c99bd491&w=900",
+        title:"Rice"
+    },
+    {
+        image:"https://img.freepik.com/free-photo/orange-cake-with-dried-apricots-powdered-sugar_2829-6158.jpg?t=st=1719595632~exp=1719599232~hmac=972b683187f377c4a5026c8defe3b547ff9621a6a02382841ae10049a3776026&w=900",
+        title:"Cake"
+    },
+    {
+        image:"https://img.freepik.com/free-photo/seafood-plate-with-shrimps-mussels-lobsters-served-with-lemon-glass-beer_140725-8799.jpg?ga=GA1.1.370232724.1715709909&semt=ais_user",
+        title:"Sea Food"
+    }
+]
