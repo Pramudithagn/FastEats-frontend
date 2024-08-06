@@ -83,7 +83,7 @@ function ResetPasswordForm() {
             fullWidth
             type="submit"
             variant="contained"
-            color="primary"
+            color="secondary"
           >
             Reset Password
           </Button>

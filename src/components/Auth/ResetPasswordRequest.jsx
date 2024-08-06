@@ -72,7 +72,7 @@ const ResetPasswordRequest = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="primary"
+                color="secondary"
                 sx={{ mt: 2,padding:"1rem" }}
               >
                 Send Reset Password Link

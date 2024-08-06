@@ -60,7 +60,7 @@ export const LoginForm = () => {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
+              color="secondary"
               sx={{ mt: 2,padding:"1rem" }}
             >
               Login

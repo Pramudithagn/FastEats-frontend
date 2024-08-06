@@ -33,7 +33,7 @@ export const RegistrationForm = () => {
   return (
     <div>
         <Typography className="text-center" variant="h5">
-          Login
+        Register
         </Typography>
         <Formik
           initialValues={initialValues}
@@ -87,16 +87,16 @@ export const RegistrationForm = () => {
             //   helperText={<ErrorMessage name="role" />}
             >
               <MenuItem value="ROLE_CUSTOMER">Customer</MenuItem>
-              <MenuItem value="ROLE_RESTAURANT_OWNER">Restaurant Owner</MenuItem>
+              <MenuItem value="ROLE_OWNER">Restaurant Owner</MenuItem>
             </Field>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
+              color="secondary"
               sx={{ mt: 2,padding:"1rem" }}
             >
-              Login
+              Register
             </Button>
           </Form>
         </Formik>
