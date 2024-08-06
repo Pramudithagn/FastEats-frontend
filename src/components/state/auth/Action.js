@@ -1,5 +1,5 @@
 import { api } from "../../../config/api"
-import { ADD_TO_FAVOURITE_FAILURE, ADD_TO_FAVOURITE_REQUEST, ADD_TO_FAVOURITE_SUCCESS, GET_USER_FAILURE, GET_USER_REQUEST, GET_USER_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS } from "./ActionType"
+import { ADD_TO_FAVOURITE_FAILURE, ADD_TO_FAVOURITE_REQUEST, ADD_TO_FAVOURITE_SUCCESS, GET_USER_FAILURE, GET_USER_REQUEST, GET_USER_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS, REQUEST_RESET_PASSWORD_FAILURE, REQUEST_RESET_PASSWORD_REQUEST, REQUEST_RESET_PASSWORD_SUCCESS } from "./ActionType"
 
 export const registerUser = (reqData) => async(dispatch) => {
     dispatch({type: REGISTER_REQUEST})
@@ -70,13 +70,14 @@ export const getUser = (jwt) => async(dispatch) => {
 export const addToFavourite = ({jwt, restaurantId}) => async(dispatch) => {
     dispatch({type: ADD_TO_FAVOURITE_REQUEST})
     try{
-        console.log(jwt)
-        const data = await api.put(`/api/restaurant/${restaurantId}/add-favourite`, {} , {
+        // console.log(jwt)
+        const {data} = await api.put(`/api/restaurant/${restaurantId}/add-favourite`, {} , {
             headers:{ Authorization: `Bearer ${jwt}`}
         })
 
-        dispatch({type: ADD_TO_FAVOURITE_SUCCESS, payload: data.data})
-        console.log("Added to the favourites :"+data)
+        console.log("response on addfav :",data)
+        dispatch({type: ADD_TO_FAVOURITE_SUCCESS, payload: data})
+        // console.log("Added to the favourites :"+data,JSON.stringify(data, null, 2))
 
     }
     catch(error){
@@ -99,3 +100,33 @@ export const logout = () => async(dispatch) => {
     }
 
 }
+
+export const resetPasswordRequest = (email) => async (dispatch) => {
+    dispatch({type:REQUEST_RESET_PASSWORD_REQUEST});
+    try {
+      const {data} = await api.post(`/auth/reset-password-request?email=${email}`,{});
+      
+      console.log("reset password -: ", data);
+     
+      dispatch({type:REQUEST_RESET_PASSWORD_SUCCESS,payload:data});
+    } catch (error) {
+      console.log("error ",error)
+      dispatch({type:REQUEST_RESET_PASSWORD_FAILURE,payload:error.message});
+    }
+  };
+  
+  export const resetPassword = (reqData) => async (dispatch) => {
+    dispatch({type:REQUEST_RESET_PASSWORD_REQUEST});
+    try {
+      const {data} = await api.post(`/auth/reset-password`,reqData.data);
+      
+      console.log("reset password -: ", data);
+  
+      reqData.navigate("/password-change-success")
+     
+      dispatch({type:REQUEST_RESET_PASSWORD_SUCCESS,payload:data});
+    } catch (error) {
+      console.log("error ",error)
+      dispatch({type:REQUEST_RESET_PASSWORD_FAILURE,payload:error.message});
+    }
+  };

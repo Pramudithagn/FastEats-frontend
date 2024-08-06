@@ -190,7 +190,7 @@ export const createEventAction = ({ data, jwt, restaurantId }) => {
 
     try {
       const res = await api.post(
-        `api/admin/events/restaurant/${restaurantId}`,
+        `api/admin/event/restaurant/${restaurantId}`,
         data,
         {
           headers: {
@@ -251,7 +251,7 @@ export const getRestaurnatsEvents = ({ restaurantId, jwt }) => {
 
     try {
       const res = await api.get(
-        `/api/admin/events/restaurant/${restaurantId}`,
+        `/api/admin/event/restaurant/${restaurantId}`,
         {
           headers: {
             Authorization: `Bearer ${jwt}`,

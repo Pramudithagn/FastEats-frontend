@@ -1,4 +1,6 @@
 import { api } from "../../../config/api";
+import { clearCartAction } from "../cart/Action";
+import { CLEARE_CART_SUCCESS } from "../cart/ActionType";
 import { createOrderFailure, createOrderRequest, createOrderSuccess, getUsersOrdersFailure, getUsersOrdersRequest, getUsersOrdersSuccess } from "./ActionCreator";
 import { GET_USERS_NOTIFICATION_FAILURE, GET_USERS_NOTIFICATION_SUCCESS } from "./ActionType";
 
@@ -8,7 +10,6 @@ export const createOrder = (reqData) => {
   return async (dispatch) => {
     dispatch(createOrderRequest());
     try {
-
       const { data } = await api.post('/api/order', reqData.order, {
         headers: {
           Authorization: `Bearer ${reqData.jwt}`,
@@ -16,9 +17,16 @@ export const createOrder = (reqData) => {
       });
       if (data.payment_url) {
         window.location.href = data.payment_url;
-      }
-      console.log("created order data", data)
+
+        console.log("created order data", data)
       dispatch(createOrderSuccess(data));
+      dispatch(clearCartAction())
+      }
+      // else{
+      //   cancelOrder(reqData.jwt, data.orderId)
+      // }
+      // console.log("created order data", data)
+      // dispatch(createOrderSuccess(data));
     } catch (error) {
       console.log("error ", error)
       dispatch(createOrderFailure(error));
@@ -57,6 +65,20 @@ export const getUsersNotificationAction = () => {
     } catch (error) {
       console.log("error ", error)
       dispatch({ type: GET_USERS_NOTIFICATION_FAILURE, payload: error });
+    }
+  };
+};
+
+export const cancelOrder = (jwt, id) => {
+  return async () => {
+    try {
+      const data = await api.delete(`/api/order/${id}/cancel`, {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+    } catch (error) {
+      console.log("cancel order error ", error)
     }
   };
 };

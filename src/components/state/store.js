@@ -7,8 +7,9 @@ import cartReducer from "./cart/Reducer";
 import { orderReducer } from "./order/Reducer";
 import restaurantsOrderReducer from "./restaurant.order/Reducer";
 import { ingredientReducer } from "./ingredient/Reducer";
+import { LOGOUT } from "./auth/ActionType";
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
     auth: authReducer,
     restaurant: restaurantReducer,
     menu: menuItemReducer,
@@ -17,5 +18,12 @@ const rootReducer = combineReducers({
     restaurantOrder: restaurantsOrderReducer,
     ingredient: ingredientReducer
 })
+
+const rootReducer = (state, action) => {
+    if (action.type === LOGOUT) {
+        state = undefined; // Reset the state to undefined, triggering a fresh initial state
+    }
+    return appReducer(state, action);
+}
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))

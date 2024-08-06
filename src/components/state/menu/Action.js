@@ -66,6 +66,8 @@ export const getMenuItemsByRestaurantId = (reqData) => {
 };
 
 export const searchMenuItem = ({keyword,jwt}) => {
+  console.log("datakey ", keyword);
+
   return async (dispatch) => {
     dispatch({ type: SEARCH_MENU_ITEM_REQUEST });
     try {
