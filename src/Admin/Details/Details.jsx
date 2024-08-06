@@ -6,14 +6,12 @@ import {
   CardContent,
   CardHeader,
   CircularProgress,
+  Fade,
   Grid,
 } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InstagramIcon from "@mui/icons-material/Instagram";
-// import XIcon from '@mui/icons-material/X';
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import {
   updateRestaurant,
@@ -24,16 +22,22 @@ const Details = () => {
   const dispatch = useDispatch();
   const { auth, restaurant, ingredients } = useSelector((store) => store);
   const jwt = localStorage.getItem("jwt");
+  const [loading, setLoading] = React.useState(false);
 
   const handleRestaurantStatus = () => {
+    setLoading(true);
     dispatch(
       updateRestaurantStatus({
         restaurantId: restaurant.usersRestaurant.id,
         jwt: auth.jwt || jwt,
       })
     );
+    setLoading(false);
   };
-  return (
+  
+  return loading === true ? (
+    <CircularProgress />
+  ) : (
     <div className="lg:px-20 px-5">
       <div className="py-5 flex justify-center items-center gap-5">
         <h1 className="text-2xl lg:text-7xl text-center font-bold p-5">
@@ -48,14 +52,12 @@ const Details = () => {
             variant="contained"
             color={restaurant.usersRestaurant?.open ? "error" : "primary"}
           >
-            {restaurant.usersRestaurant?.open
-              ? "Close"
-              : "Open"}
+            {restaurant.usersRestaurant?.open ? "Close" : "Open"}
           </Button>
         </div>
       </div>
 
-      <Grid container spacing={2}>
+      <Grid className="pb-12" container spacing={2}>
         <Grid item xs={12}>
           <Card>
             <CardHeader
@@ -64,7 +66,7 @@ const Details = () => {
             <CardContent>
               <div className="space-y-4 text-gray-200">
                 <div className="flex">
-                  <p className="w-48">Owner</p>
+                  <p className="w-40">Owner</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -72,7 +74,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                  <p className="w-48">Restaurant Name</p>
+                  <p className="w-40">Name</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -80,7 +82,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                  <p className="w-48">Cuisine Type</p>
+                  <p className="w-40">Cuisine Type</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -88,15 +90,15 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                  <p className="w-48">Opning Hours</p>
-                  <p className="text-gray-400">
+                  <p className="w-40">Opening Hours</p>
+                  <p className="text-gray-400 text-sm">
                     {" "}
                     <span className="pr-5">-</span>{" "}
                     {restaurant.usersRestaurant?.openingHours}
                   </p>
                 </div>
                 <div className="flex">
-                  <p className="w-48">Status</p>
+                  <p className="w-40">Status</p>
                   <div className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -123,15 +125,15 @@ const Details = () => {
             <CardContent>
               <div className="space-y-3 text-gray-200">
                 <div className="flex">
-                  <p className="w-48">Country</p>
+                  <p className="w-40">Street Address</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
-                    {restaurant.usersRestaurant?.address.country}
+                    {restaurant.usersRestaurant?.address.streetAddress}
                   </p>
                 </div>
                 <div className="flex">
-                  <p className="w-48">City</p>
+                  <p className="w-40">City</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -139,7 +141,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                  <p className="w-48">Postal Code</p>
+                  <p className="w-40">Postal Code</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -147,11 +149,11 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                  <p className="w-48">Street Address</p>
+                  <p className="w-40">Country</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
-                    {restaurant.usersRestaurant?.address.streetAddress}
+                    {restaurant.usersRestaurant?.address.country}
                   </p>
                 </div>
               </div>
@@ -166,7 +168,7 @@ const Details = () => {
             <CardContent>
               <div className="space-y-3 text-gray-200">
                 <div className="flex">
-                  <p className="w-48">Email</p>
+                  <p className="w-40">Email</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>
@@ -174,16 +176,16 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                  <p className="w-48">Mobile</p>
+                  <p className="w-40">Phone</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>
-                    {" +91"}
-                    {restaurant.usersRestaurant?.contactInformation.mobile}
+                    {/* {" +94"} */}
+                    {restaurant.usersRestaurant?.contactInformation.phone}
                   </p>
                 </div>
                 <div className="flex items-center">
-                  <p className="w-48">Social</p>
+                  <p className="w-40">Social</p>
                   <div className="text-gray-400 flex items-center pb-3">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -199,27 +201,7 @@ const Details = () => {
                     <a
                       className="ml-5"
                       href={
-                        restaurant.usersRestaurant?.contactInformation.instagram
-                      }
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <TwitterIcon sx={{ fontSize: "3rem" }} />
-                    </a>
-                    <a
-                      className="ml-5"
-                      href={
-                        restaurant.usersRestaurant?.contactInformation.instagram
-                      }
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <LinkedInIcon sx={{ fontSize: "3rem" }} />
-                    </a>
-                    <a
-                      className="ml-5"
-                      href={
-                        restaurant.usersRestaurant?.contactInformation.instagram
+                        restaurant.usersRestaurant?.contactInformation.facebook
                       }
                       target="_blank"
                       rel="noreferrer"
@@ -229,7 +211,7 @@ const Details = () => {
                   </div>
                 </div>
                 {/* <div className="flex">
-                  <p className="w-48">Twitter</p>
+                  <p className="w-40">Twitter</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -249,9 +231,12 @@ const Details = () => {
           </Card>
         </Grid>
       </Grid>
-      <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={restaurant.loading}>
-          <CircularProgress color="inherit" />
-        </Backdrop>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={restaurant.loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 };

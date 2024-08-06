@@ -10,20 +10,30 @@ import CloseIcon from "@mui/icons-material/Close";
 import { uploadToCloudinary } from "../utils/uploadToCloudinary";
 import { CircularProgress, IconButton } from "@mui/material";
 
+import {
+  LocalizationProvider,
+  DateTimePicker,
+  TimePicker,
+} from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
+
 const initialValues = {
   name: "",
   description: "",
   cuisineType: "",
   streetAddress: "",
   city: "",
-  state: "",
+  stateProvince: "",
   postalCode: "",
   country: "",
   email: "",
-  mobile: "",
-  twitter: "",
+  phone: "",
+  facebook: "",
   instagram: "",
-  openingHours: "Mon-Sun: 9:00 AM - 9:00 PM",
+  openingTime: dayjs(), 
+  closingTime: dayjs(),
+
   images: [],
 };
 
@@ -40,26 +50,35 @@ const CreateRestaurantForm = () => {
       address: {
         streetAddress: values.streetAddress,
         city: values.city,
-        stateProvince: values.state,
+        stateProvince: values.stateProvince,
         postalCode: values.postalCode,
         country: values.country,
       },
       contactInformation: {
         email: values.email,
-        mobile: values.mobile,
-        twitter: values.twitter,
+        phone: values.phone,
+        facebook: values.facebook,
         instagram: values.instagram,
       },
-      openingHours: values.openingHours,
+      openingHours: `${
+        values.openingTime ? values.openingTime.format("hh:mm A") : ""
+      } - ${values.closingTime ? values.closingTime.format("hh:mm A") : ""}`,
       images: values.images,
     };
 
     dispatch(createRestaurant({ data, jwt }));
-    console.log(data);
+  };
+
+  const handleTimeChange = (time, timeType) => {
+    if (time && dayjs(time).isValid()) {
+      // const formattedTime = dayjs(time).format("hh:mm A");
+      formik.setFieldValue(timeType, time);
+    }
   };
 
   const formik = useFormik({
     initialValues,
+    // initialValues: formValues,
     onSubmit: handleSubmit,
   });
 
@@ -94,16 +113,15 @@ const CreateRestaurantForm = () => {
                 onChange={handleImageChange}
               />
 
-              
               <label className="relative" htmlFor="fileInput">
                 <span className="w-24 h-24 cursor-pointer flex items-center justify-center p-3 border rounded-md border-gray-600">
-                  <AddPhotoAlternateIcon
-                    className="text-white"
-                  />
+                  <AddPhotoAlternateIcon className="text-white" />
                 </span>
-                {uploadImage && <div className="absolute left-0 right-0 top-0 bottom-0 w-24 h-24 flex justify-center items-center">
-                <CircularProgress />
-                </div>}
+                {uploadImage && (
+                  <div className="absolute left-0 right-0 top-0 bottom-0 w-24 h-24 flex justify-center items-center">
+                    <CircularProgress />
+                  </div>
+                )}
               </label>
 
               <div className="flex flex-wrap gap-2">
@@ -165,7 +183,7 @@ const CreateRestaurantForm = () => {
                 value={formik.values.cuisineType}
               />
             </Grid>
-            <Grid item xs={6}>
+            {/* <Grid item xs={6}>
               <TextField
                 fullWidth
                 id="openingHours"
@@ -175,6 +193,49 @@ const CreateRestaurantForm = () => {
                 onChange={formik.handleChange}
                 value={formik.values.openingHours}
               />
+            </Grid> */}
+
+            {/* <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DateTimePicker
+              label="Opening Hours Start"
+              value={formValues.openingHours.start}
+              onChange={(date) => handleDateChange(date, "start")}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+        </Grid>
+        <Grid item xs={6}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DateTimePicker
+              label="Opening Hours End"
+              value={formValues.openingHours.end}
+              onChange={(date) => handleDateChange(date, "end")}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+        </Grid>
+      </Grid> */}
+            <Grid item xs={6}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <TimePicker
+                  label="Opening Time"
+                  value={formik.values.openingTime} // Ensure this is a dayjs object or null
+                  onChange={(time) => handleTimeChange(time, "openingTime")}
+                  renderInput={(props) => <TextField {...props} fullWidth />}
+                />
+              </LocalizationProvider>
+            </Grid>
+            <Grid item xs={6}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <TimePicker
+                  label="Closing Time"
+                  value={formik.values.closingTime} // Ensure this is a dayjs object or null
+                  onChange={(time) => handleTimeChange(time, "closingTime")}
+                  renderInput={(props) => <TextField {...props} fullWidth />}
+                />
+              </LocalizationProvider>
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -245,23 +306,23 @@ const CreateRestaurantForm = () => {
             <Grid item xs={6}>
               <TextField
                 fullWidth
-                id="mobile"
-                name="mobile"
-                label="Mobile"
+                id="phone"
+                name="phone"
+                label="Phone"
                 variant="outlined"
                 onChange={formik.handleChange}
-                value={formik.values.mobile}
+                value={formik.values.phone}
               />
             </Grid>
             <Grid item xs={6}>
               <TextField
                 fullWidth
-                id="twitter"
-                name="twitter"
-                label="Twitter"
+                id="facebook"
+                name="facebook"
+                label="Facebook"
                 variant="outlined"
                 onChange={formik.handleChange}
-                value={formik.values.twitter}
+                value={formik.values.facebook}
               />
             </Grid>
             <Grid item xs={6}>
@@ -275,7 +336,6 @@ const CreateRestaurantForm = () => {
                 value={formik.values.instagram}
               />
             </Grid>
-            
           </Grid>
           <Button variant="contained" color="primary" type="submit">
             Create Restaurant

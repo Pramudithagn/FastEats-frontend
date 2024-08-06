@@ -1,4 +1,4 @@
-import { Box, Button, Card, Grid, Modal, TextField, Typography } from "@mui/material";
+import { Box, Button, Card, Grid, Modal, TextField, Typography, CircularProgress, IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createEventAction, getRestaurnatsEvents } from "../../components/state/restaurant/Action";
@@ -8,6 +8,9 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import EventCard from "./EventCard";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import CloseIcon from "@mui/icons-material/Close";
+import { uploadToCloudinary } from "../utils/uploadToCloudinary";
 
 const style = {
   position: "absolute",
@@ -37,6 +40,7 @@ const Events = () => {
   const handleCloseModal = () => setOpenModal(false);
   const handleOpenModal = () => setOpenModal(true);
   const jwt = localStorage.getItem("jwt");
+  const [uploadImage, setUploadingImage] = useState("");
 
   const [formValues, setFormValues] = useState(initialValues);
 
@@ -54,6 +58,23 @@ const Events = () => {
 
   };
 
+  const handleImageChange = async (event) => {
+    const file = event.target.files[0];
+    setUploadingImage(true);
+    const image = await uploadToCloudinary(file);
+    // formik.setFormValues("images", [...formik.values.images, image]);
+    setFormValues({ ...formValues, image: image });
+    setUploadingImage(false);
+  };
+
+  const handleRemoveImage = () => {
+    // const updatedImages = [...formValues.image];
+      const updatedImage = "";
+    // updatedImages.splice(index, 1);
+    // formik.setFieldValue("images", updatedImages);
+    setFormValues({ ...formValues, image: updatedImage });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -65,6 +86,7 @@ const Events = () => {
       })
     );
     console.log("Image URL:", formValues, restaurant.usersRestaurant?.id);
+    handleCloseModal()
     // setFormValues(initialValues);
     // handleCloseModal();
   };
@@ -83,12 +105,12 @@ const Events = () => {
   return (
     <div>
       <div className="p-5">
-        <Button sx={{ padding: "1rem 2rem" }} onClick={handleOpenModal} variant="contained" color="primary">
+        <Button sx={{ padding: "1rem 2rem" }} onClick={handleOpenModal} variant="contained" color="secondary">
           Create New Event
         </Button>
       </div>
 
-      <div className="mt-5 px-5 flex flex-wrap gap-5">
+      <div className="mt-5 px-5 pb-10 flex flex-wrap gap-5">
         {restaurant.restaurantEvents.map((item) => (
           <EventCard item={item} />
         ))}
@@ -105,14 +127,60 @@ const Events = () => {
         <Box sx={style}>
           <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <TextField name="image" label="Image URL" variant="outlined" fullWidth value={formValues.image} onChange={handleFormChange} />
+              </Grid> */}
+              <Grid className="flex flex-wrap gap-5" item xs={12}>
+                <input
+                  type="file"
+                  accept="image/*"
+                  id="fileInput"
+                  style={{ display: "none" }}
+                  onChange={handleImageChange}
+                />
+
+                <label className="relative" htmlFor="fileInput">
+                  <span className="w-24 h-24 cursor-pointer flex items-center justify-center p-3 border rounded-md border-gray-600">
+                    <AddPhotoAlternateIcon className="text-white" />
+                  </span>
+                  {uploadImage && (
+                    <div className="absolute left-0 right-0 top-0 bottom-0 w-24 h-24 flex justify-center items-center">
+                      <CircularProgress />
+                    </div>
+                  )}
+                </label>
+
+                <div className="flex flex-wrap gap-2">
+                  {/* {formValues.image.map((image, index) => ( */}
+                    {(formValues.image !== "") &&
+                    <div className="relative">
+                      <img
+                        className="w-24 h-24 object-cover"
+                        // key={index}
+                        src={formValues.image}
+                        alt={`EventImage`}
+                      />
+                      <IconButton
+                        onClick={() => handleRemoveImage()}
+                        size="small"
+                        sx={{
+                          position: "absolute",
+                          top: 0,
+                          right: 0,
+                          outline: "none",
+                        }}
+                      >
+                        <CloseIcon sx={{ fontSize: "1rem" }} />
+                      </IconButton>
+                    </div>
+                    }
+                </div>
               </Grid>
               <Grid item xs={12}>
                 <TextField name="location" label="Location" variant="outlined" fullWidth value={formValues.location} onChange={handleFormChange} />
               </Grid>
               <Grid item xs={12}>
-                <TextField name="name" label="Event Name" variant="outlined" fullWidth value={formValues.name} onChange={handleFormChange} />
+                <TextField name="name" label="Event Description" variant="outlined" fullWidth value={formValues.name} onChange={handleFormChange} />
               </Grid>
               <Grid item xs={12}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -142,7 +210,7 @@ const Events = () => {
               </Grid>
             </Grid>
             <Box mt={2}>
-              <Button variant="contained" color="primary" type="submit">
+              <Button variant="contained" color="secondary" type="submit">
                 Submit
               </Button>
             </Box>

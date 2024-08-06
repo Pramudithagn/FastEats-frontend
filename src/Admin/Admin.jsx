@@ -45,16 +45,14 @@ export const Admin = () => {
   }, [restaurant.usersRestaurant] );
   
   return (
-    <div >
-       <div className="lg:z-10">
+    <div className="flex flex-col h-screen">
+       <div className="fixed top-0 left-0 right-0 z-50">
       <AdminNavbar handleOpenSideBar={handleOpenSideBar} />
       </div>
-      <div className="lg:flex justify-between">
-        {/* <div className="-z-10"> */}
+      <div className="flex flex-1 mt-[60px] lg:mt-[72px] justify-between">
           <AdminSidebar handleClose={handleCloseSideBar} open={openSideBar} />
-        {/* </div> */}
 
-        <div className="lg:w-[80vw] ">
+        <div className="lg:w-[80vw] overflow-y-auto  bg-slate-700">
           <Routes>
             {/* <Route path="/" element={<RestaurantDashboard />} /> */}
             <Route path="/" element={<Profile />} />
