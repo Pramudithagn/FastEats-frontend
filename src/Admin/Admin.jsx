@@ -16,6 +16,7 @@ import { getIngredientCategory, getIngredientsOfRestaurant } from "../components
 import { getRestaurantsCategory } from "../components/state/restaurant/Action";
 import { fetchRestaurantsOrder } from "../components/state/restaurant.order/Action";
 import AdminNavbar from "./AdminNavbar";
+import { Profile } from "../components/Profile/Profile";
 // import { getUsersOrders } from "../State/Customers/Orders/Action";
 
 export const Admin = () => {
@@ -55,7 +56,8 @@ export const Admin = () => {
 
         <div className="lg:w-[80vw] ">
           <Routes>
-            <Route path="/" element={<RestaurantDashboard />} />
+            {/* <Route path="/" element={<RestaurantDashboard />} /> */}
+            <Route path="/" element={<Profile />} />
             <Route path="/orders" element={<RestaurantsOrder />} />
             <Route path="/menu" element={<RestaurantsMenu />} />
             <Route path="/add-menu" element={<AddMenuForm />} />

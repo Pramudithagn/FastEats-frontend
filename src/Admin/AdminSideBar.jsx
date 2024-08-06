@@ -17,7 +17,8 @@ import CategoryIcon from '@mui/icons-material/Category';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 
 const menu = [
-  { title: "Dashboard", icon: <Dashboard />, path: "/" },
+  // { title: "Dashboard", icon: <Dashboard />, path: "/" },
+  { title: "Profile", icon: <Dashboard />, path: "/" },
   { title: "Orders", icon: <ShoppingBagIcon />, path: "/orders" },
   { title: "Menu", icon: <ShopTwoIcon />, path: "/menu" },
   { title: "Food Category", icon: <CategoryIcon />, path: "/category" },
