@@ -53,7 +53,7 @@ const CreateIngredientCategoryForm = ({ handleClose }) => {
             fullWidth
           />
 
-          <Button type="submit" variant="contained" color="primary">
+          <Button type="submit" variant="contained" color="secondary">
             Create
           </Button>
         </form>

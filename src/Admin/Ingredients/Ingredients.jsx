@@ -60,7 +60,7 @@ const Ingredients = () => {
     <div className="px-2">
       <Grid container spacing={1}>
         <Grid  item xs={12} lg={8}>
-          <Card className="mt-1">
+          <Card className="mt-2 lg:ml-4">
             <CardHeader
               title={"Ingredients"}
               sx={{
@@ -75,7 +75,7 @@ const Ingredients = () => {
                 </IconButton>
               }
             />
-            <TableContainer className="h-[88vh] overflow-y-auto">
+            <TableContainer className="h-[41vh] lg:h-[85vh] ">
               <Table sx={{}} aria-label="table in dashboard">
                 <TableHead>
                   <TableRow>
@@ -88,7 +88,7 @@ const Ingredients = () => {
                     <TableCell>Availability</TableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody>
+                <TableBody className="lg:overflow-y-auto">
                   {ingredient.ingredients.map((item, index) => (
                     <TableRow
                       className="cursor-pointer"
@@ -119,7 +119,7 @@ const Ingredients = () => {
           </Card>
         </Grid>
         <Grid item xs={12} lg={4}>
-          <Card className="mt-1">
+          <Card className="mt-2">
             <CardHeader
               title={"Category"}
               sx={{

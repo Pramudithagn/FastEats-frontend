@@ -28,7 +28,7 @@ const FoodCategory = () => {
     
   return (
     <div>
-         <Card className="mt-1">
+         <Card className="mt-1 ml-2">
         <CardHeader
           title={"Categories"}
           sx={{

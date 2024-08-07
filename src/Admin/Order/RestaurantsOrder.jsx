@@ -72,7 +72,7 @@ const RestaurantsOrder = () => {
               <FormControlLabel
                 key={index}
                 value={item.value}
-                control={<Radio />}
+                control={<Radio color="blue" />}
                 label={item.label}
                 sx={{ color: "gray" }}
               />

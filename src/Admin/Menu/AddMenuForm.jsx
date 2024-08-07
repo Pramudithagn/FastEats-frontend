@@ -11,7 +11,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import {
   Alert,
   Box,
@@ -73,6 +73,7 @@ const AddMenuForm = () => {
   const { restaurant, ingredient, auth ,menu} = useSelector((store) => store);
   const [uploadImage, setUploadingImage] = useState("");
   const jwt = localStorage.getItem("jwt");
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues,
@@ -81,6 +82,7 @@ const AddMenuForm = () => {
 
       dispatch(createMenuItem({ menu: values, jwt: auth.jwt || jwt }));
       console.log("values ----- ", values);
+      navigate('/admin/restaurant/menu')
     },
   });
 
@@ -310,7 +312,7 @@ const AddMenuForm = () => {
               </FormControl>
             </Grid> */}
             </Grid>
-            <Button variant="contained" color="primary" type="submit">
+            <Button variant="contained" color="secondary" type="submit">
               Create Menu Item
             </Button>
           </form>

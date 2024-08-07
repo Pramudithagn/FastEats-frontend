@@ -118,7 +118,8 @@ import {
   
                     <TableCell sx={{}}>{item?.customer.email}</TableCell>
   
-                    <TableCell>${item?.totalAmount}</TableCell>
+                    {/* <TableCell>${item?.totalAmount}</TableCell> */}
+                    <TableCell>${item?.totalPrice}</TableCell>
   
                     <TableCell className="">
                       {item.items.map((orderItem) => (
