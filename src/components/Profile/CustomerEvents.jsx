@@ -35,7 +35,7 @@ const CustomerEvents = () => {
   }, [auth.jwt]);
 
   return (
-    <div className="mt-5 px-5 flex flex-wrap gap-5">
+    <div className="mt-5 pb-10 px-5 lg:pl-56 flex flex-wrap gap-5">
       {restaurant.events.map((item) => (
         <div>
           <EventCard isCustomer={true} item={item} />
