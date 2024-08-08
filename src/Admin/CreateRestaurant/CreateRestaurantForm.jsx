@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
+import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -36,6 +37,24 @@ const initialValues = {
 
   images: [],
 };
+
+const validationSchema = Yup.object({
+  name: Yup.string().required("Name is required"),
+  description: Yup.string().required("Description is required"),
+  cuisineType: Yup.string().required("Cuisine Type is required"),
+  streetAddress: Yup.string().required("Street Address is required"),
+  city: Yup.string().required("City is required"),
+  stateProvince: Yup.string().required("State/Province is required"),
+  postalCode: Yup.number().required("Postal Code is required").typeError("Postal Code must be a number"),
+  country: Yup.string().required("Country is required"),
+  email: Yup.string().email("Invalid email address").required("Email is required"),
+  phone: Yup.number().required("Phone number is required").typeError("Phone number must be a number"),
+  facebook: Yup.string().url("Invalid URL"),
+  instagram: Yup.string().url("Invalid URL"),
+  openingTime: Yup.date().required("Opening time is required"),
+  closingTime: Yup.date().required("Closing time is required"),
+  images: Yup.array().min(1, "At least one image is required"),
+});
 
 const CreateRestaurantForm = () => {
   const dispatch = useDispatch();
@@ -78,6 +97,7 @@ const CreateRestaurantForm = () => {
 
   const formik = useFormik({
     initialValues,
+    validationSchema,
     // initialValues: formValues,
     onSubmit: handleSubmit,
   });
@@ -159,6 +179,9 @@ const CreateRestaurantForm = () => {
                 variant="outlined"
                 onChange={formik.handleChange}
                 value={formik.values.name}
+                onBlur={formik.handleBlur}
+                error={formik.touched.name && Boolean(formik.errors.name)}
+                helperText={formik.touched.name && formik.errors.name}
               />
             </Grid>
             <Grid item xs={12}>
@@ -170,6 +193,9 @@ const CreateRestaurantForm = () => {
                 variant="outlined"
                 onChange={formik.handleChange}
                 value={formik.values.description}
+                onBlur={formik.handleBlur}
+                error={formik.touched.description && Boolean(formik.errors.description)}
+                helperText={formik.touched.description && formik.errors.description}
               />
             </Grid>
             <Grid item xs={6}>
@@ -181,6 +207,9 @@ const CreateRestaurantForm = () => {
                 variant="outlined"
                 onChange={formik.handleChange}
                 value={formik.values.cuisineType}
+                onBlur={formik.handleBlur}
+                error={formik.touched.cuisineType && Boolean(formik.errors.cuisineType)}
+                helperText={formik.touched.cuisineType && formik.errors.cuisineType}
               />
             </Grid>
             {/* <Grid item xs={6}>
@@ -223,7 +252,13 @@ const CreateRestaurantForm = () => {
                   label="Opening Time"
                   value={formik.values.openingTime} // Ensure this is a dayjs object or null
                   onChange={(time) => handleTimeChange(time, "openingTime")}
-                  renderInput={(props) => <TextField {...props} fullWidth />}
+                  renderInput={(props) => 
+                  <TextField 
+                    {...props} 
+                    fullWidth
+                    error={formik.touched.openingTime && Boolean(formik.errors.openingTime)}
+                    helperText={formik.touched.openingTime && formik.errors.openingTime}
+                  />}
                 />
               </LocalizationProvider>
             </Grid>
@@ -233,7 +268,13 @@ const CreateRestaurantForm = () => {
                   label="Closing Time"
                   value={formik.values.closingTime} // Ensure this is a dayjs object or null
                   onChange={(time) => handleTimeChange(time, "closingTime")}
-                  renderInput={(props) => <TextField {...props} fullWidth />}
+                  renderInput={(props) => 
+                  <TextField 
+                    {...props} 
+                    fullWidth
+                    error={formik.touched.closingTime && Boolean(formik.errors.closingTime)}
+                    helperText={formik.touched.closingTime && formik.errors.closingTime}
+                  />}
                 />
               </LocalizationProvider>
             </Grid>
@@ -246,6 +287,9 @@ const CreateRestaurantForm = () => {
                 variant="outlined"
                 onChange={formik.handleChange}
                 value={formik.values.streetAddress}
+                onBlur={formik.handleBlur}
+                error={formik.touched.streetAddress && Boolean(formik.errors.streetAddress)}
+                helperText={formik.touched.streetAddress && formik.errors.streetAddress}
               />
             </Grid>
             <Grid item xs={4}>
@@ -257,6 +301,9 @@ const CreateRestaurantForm = () => {
                 variant="outlined"
                 onChange={formik.handleChange}
                 value={formik.values.city}
+                onBlur={formik.handleBlur}
+                error={formik.touched.city && Boolean(formik.errors.city)}
+                helperText={formik.touched.city && formik.errors.city}
               />
             </Grid>
             <Grid item xs={4}>
@@ -268,6 +315,9 @@ const CreateRestaurantForm = () => {
                 variant="outlined"
                 onChange={formik.handleChange}
                 value={formik.values.stateProvince}
+                onBlur={formik.handleBlur}
+                error={formik.touched.stateProvince && Boolean(formik.errors.stateProvince)}
+                helperText={formik.touched.stateProvince && formik.errors.stateProvince}
               />
             </Grid>
             <Grid item xs={4}>
@@ -279,6 +329,9 @@ const CreateRestaurantForm = () => {
                 variant="outlined"
                 onChange={formik.handleChange}
                 value={formik.values.postalCode}
+                onBlur={formik.handleBlur}
+                error={formik.touched.postalCode && Boolean(formik.errors.postalCode)}
+                helperText={formik.touched.postalCode && formik.errors.postalCode}
               />
             </Grid>
             <Grid item xs={12}>
@@ -290,6 +343,9 @@ const CreateRestaurantForm = () => {
                 variant="outlined"
                 onChange={formik.handleChange}
                 value={formik.values.country}
+                onBlur={formik.handleBlur}
+                error={formik.touched.country && Boolean(formik.errors.country)}
+                helperText={formik.touched.country && formik.errors.country}
               />
             </Grid>
             <Grid item xs={6}>
@@ -301,6 +357,9 @@ const CreateRestaurantForm = () => {
                 variant="outlined"
                 onChange={formik.handleChange}
                 value={formik.values.email}
+                onBlur={formik.handleBlur}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
               />
             </Grid>
             <Grid item xs={6}>
@@ -312,6 +371,9 @@ const CreateRestaurantForm = () => {
                 variant="outlined"
                 onChange={formik.handleChange}
                 value={formik.values.phone}
+                onBlur={formik.handleBlur}
+                error={formik.touched.phone && Boolean(formik.errors.phone)}
+                helperText={formik.touched.phone && formik.errors.phone}
               />
             </Grid>
             <Grid item xs={6}>
@@ -323,6 +385,9 @@ const CreateRestaurantForm = () => {
                 variant="outlined"
                 onChange={formik.handleChange}
                 value={formik.values.facebook}
+                onBlur={formik.handleBlur}
+                error={formik.touched.facebook && Boolean(formik.errors.facebook)}
+                helperText={formik.touched.facebook && formik.errors.facebook}
               />
             </Grid>
             <Grid item xs={6}>
@@ -334,10 +399,13 @@ const CreateRestaurantForm = () => {
                 variant="outlined"
                 onChange={formik.handleChange}
                 value={formik.values.instagram}
+                onBlur={formik.handleBlur}
+                error={formik.touched.instagram && Boolean(formik.errors.instagram)}
+                helperText={formik.touched.instagram && formik.errors.instagram}
               />
             </Grid>
           </Grid>
-          <Button variant="contained" color="primary" type="submit">
+          <Button variant="contained" color="secondary" type="submit">
             Create Restaurant
           </Button>
         </form>

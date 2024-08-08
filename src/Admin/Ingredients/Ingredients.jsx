@@ -170,6 +170,8 @@ const Ingredients = () => {
         onClose={handleCloseIngredient}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        className="mx-20"
+        
       >
         <Box sx={style}>
           <CreateIngredientForm handleClose={handleCloseIngredient} />

@@ -4,10 +4,10 @@ import { Route, Routes } from "react-router-dom";
 import AdminSidebar from "./AdminSideBar";
 import RestaurantDashboard from "./RestaurantDashboard/RestaurantDashboard";
 import RestaurantsOrder from "./Order/RestaurantsOrder";
-import RestaurantsMenu from "./Menu/RestaurantsMenu";
-import AddMenuForm from "./Menu/AddMenuForm";
+import RestaurantsFood from "./Food/RestaurantsFood";
+import AddFoodForm from "./Food/AddFoodForm";
 import CreateRestaurantForm from "./CreateRestaurant/CreateRestaurantForm";
-import FoodCategory from "./Food/FoodCategory";
+import FoodCategory from "./FoodCategory/FoodCategory";
 import Ingredients from "./Ingredients/Ingredients";
 import { useDispatch, useSelector } from "react-redux";
 import Details from "./Details/Details";
@@ -57,8 +57,8 @@ export const Admin = () => {
             {/* <Route path="/" element={<RestaurantDashboard />} /> */}
             <Route path="/" element={<Profile />} />
             <Route path="/orders" element={<RestaurantsOrder />} />
-            <Route path="/menu" element={<RestaurantsMenu />} />
-            <Route path="/add-menu" element={<AddMenuForm />} />
+            <Route path="/food" element={<RestaurantsFood />} />
+            <Route path="/add-food" element={<AddFoodForm />} />
             <Route path="/add-restaurant" element={<CreateRestaurantForm />} />
             <Route path="/event" element={<Events />} />
 

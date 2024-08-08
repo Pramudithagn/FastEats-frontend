@@ -20,7 +20,7 @@ const menu = [
   // { title: "Dashboard", icon: <Dashboard />, path: "/" },
   { title: "Profile", icon: <Dashboard />, path: "/" },
   { title: "Orders", icon: <ShoppingBagIcon />, path: "/orders" },
-  { title: "Menu", icon: <ShopTwoIcon />, path: "/menu" },
+  { title: "Foods", icon: <ShopTwoIcon />, path: "/food" },
   { title: "Food Category", icon: <CategoryIcon />, path: "/category" },
   { title: "Ingredients", icon: <FastfoodIcon />, path: "/ingredients" },
   { title: "Events", icon: <EventIcon />, path: "/event" },

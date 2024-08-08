@@ -147,7 +147,7 @@ import {
                           }}
                           label={item?.orderStatus}
                           size="small"
-                          color={item.orderStatus === "PENDING" ? "info" : item?.orderStatus === "DELIVERED" ? "success" : "secondary"}
+                          color={item.orderStatus === "PENDING" ? "info" : item?.orderStatus === "DELIVERED" ? "success" : item?.orderStatus === "COMPLETED" ? "warning" : "secondary"}
                           className="text-white"
                         />
                       </TableCell>

@@ -66,7 +66,7 @@ const Details = () => {
             <CardContent>
               <div className="space-y-4 text-gray-200">
                 <div className="flex">
-                  <p className="w-40">Owner</p>
+                <p className="w-32 lg:w-40">Owner</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -74,7 +74,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                  <p className="w-40">Name</p>
+                <p className="w-32 lg:w-40">Name</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -82,7 +82,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                  <p className="w-40">Cuisine Type</p>
+                <p className="w-32 lg:w-40">Cuisine Type</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -90,7 +90,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                  <p className="w-40">Opening Hours</p>
+                <p className="w-32 lg:w-40">Opening Hours</p>
                   <p className="text-gray-400 text-sm">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -98,7 +98,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                  <p className="w-40">Status</p>
+                <p className="w-32 lg:w-40">Status</p>
                   <div className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -125,7 +125,7 @@ const Details = () => {
             <CardContent>
               <div className="space-y-3 text-gray-200">
                 <div className="flex">
-                  <p className="w-40">Street Address</p>
+                  <p className="w-32 lg:w-40">Street Address</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -133,7 +133,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                  <p className="w-40">City</p>
+                <p className="w-32 lg:w-40">City</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -141,7 +141,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                  <p className="w-40">Postal Code</p>
+                <p className="w-32 lg:w-40">Postal Code</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -149,7 +149,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                  <p className="w-40">Country</p>
+                <p className="w-32 lg:w-40">Country</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -168,7 +168,7 @@ const Details = () => {
             <CardContent>
               <div className="space-y-3 text-gray-200">
                 <div className="flex">
-                  <p className="w-40">Email</p>
+                  <p className="w-24 lg:w-40">Email</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>
@@ -176,7 +176,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                  <p className="w-40">Phone</p>
+                <p className="w-24 lg:w-40">Phone</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>
@@ -185,7 +185,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex items-center">
-                  <p className="w-40">Social</p>
+                <p className="w-24 lg:w-40">Social</p>
                   <div className="text-gray-400 flex items-center pb-3">
                     {" "}
                     <span className="pr-5">-</span>{" "}
