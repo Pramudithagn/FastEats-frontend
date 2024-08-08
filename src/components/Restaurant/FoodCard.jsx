@@ -27,7 +27,7 @@ const ingredientItems = [
   },
 ];
 
-export const MenuCard = ({ item }) => {
+export const FoodCard = ({ item }) => {
   const dispatch = useDispatch();
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [snackbarOpen, setSnackbarOpen] = useState(false);

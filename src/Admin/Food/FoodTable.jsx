@@ -20,25 +20,25 @@ import {
   import { useLocation, useNavigate, useParams } from "react-router-dom";
   
   import { useDispatch, useSelector } from "react-redux";
-  import { deleteFoodAction, getMenuItemsByRestaurantId, updateMenuItemsAvailability } from "../../components/state/menu/Action";
+  import { deleteFoodAction, getFoodItemsByRestaurantId, updateFoodItemsAvailability } from "../../components/state/food/Action";
   import { updateStockOfIngredient } from "../../components/state/ingredient/Action";
   import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule";
   import { categorizeIngredients } from "../../components/util/categorizeIngredients";
   import DeleteIcon from "@mui/icons-material/Delete";
   import { Create, Remove } from "@mui/icons-material";
   
-  const MenuTable = ({ isDashboard, name }) => {
+  const FoodTable = ({ isDashboard, name }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { menu, ingredient, restaurant, auth } = useSelector((store) => store);
+    const { food, ingredient, restaurant, auth } = useSelector((store) => store);
     const { id } = useParams();
     const jwt = localStorage.getItem("jwt");
   
     useEffect(() => {
       if (restaurant.usersRestaurant) {
         dispatch(
-          getMenuItemsByRestaurantId({
+          getFoodItemsByRestaurantId({
             restaurantId: restaurant.usersRestaurant?.id,
             jwt: localStorage.getItem("jwt"),
             seasonal: false,
@@ -52,12 +52,12 @@ import {
   
     // console.log(
     //   "-------- ",
-    //   menu.menuItems[1].ingredient,
-    //   categorizeIngredients(menu.menuItems[1].ingredients)
+    //   food.foodItems[1].ingredient,
+    //   categorizeIngredients(food.foodItems[1].ingredients)
     // );
   
     const handleFoodAvialability = (foodId) => {
-      dispatch(updateMenuItemsAvailability({ foodId, jwt: auth.jwt || jwt }));
+      dispatch(updateFoodItemsAvailability({ foodId, jwt: auth.jwt || jwt }));
     };
   
     const handleDeleteFood = (foodId) => {
@@ -77,7 +77,7 @@ import {
               "& .MuiCardHeader-action": { mt: 0.6 },
             }}
             action={
-              <IconButton onClick={() => navigate("/admin/restaurant/add-menu")}>
+              <IconButton onClick={() => navigate("/admin/restaurant/add-food")}>
                 <Create />
               </IconButton>
             }
@@ -98,7 +98,7 @@ import {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {menu.menuItems?.map((item) => (
+                {food.foodItems?.map((item) => (
                   <TableRow
                     hover
                     key={item.id}
@@ -168,11 +168,11 @@ import {
           </TableContainer>
         </Card>
   
-        <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={menu.loading}>
+        <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={food.loading}>
           <CircularProgress color="inherit" />
         </Backdrop>
       </Box>
     );
   };
   
-  export default MenuTable;
+  export default FoodTable;

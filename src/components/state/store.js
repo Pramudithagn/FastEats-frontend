@@ -2,7 +2,7 @@ import { applyMiddleware, combineReducers, legacy_createStore } from "redux";
 import { authReducer } from "./auth/Reducer";
 import { thunk } from "redux-thunk";
 import restaurantReducer from "./restaurant/Reducer";
-import menuItemReducer from "./menu/Reducer";
+import foodItemReducer from "./food/Reducer";
 import cartReducer from "./cart/Reducer";
 import { orderReducer } from "./order/Reducer";
 import restaurantsOrderReducer from "./restaurant.order/Reducer";
@@ -12,7 +12,7 @@ import { LOGOUT } from "./auth/ActionType";
 const appReducer = combineReducers({
     auth: authReducer,
     restaurant: restaurantReducer,
-    menu: menuItemReducer,
+    food: foodItemReducer,
     cart: cartReducer,
     order: orderReducer,
     restaurantOrder: restaurantsOrderReducer,
@@ -21,7 +21,7 @@ const appReducer = combineReducers({
 
 const rootReducer = (state, action) => {
     if (action.type === LOGOUT) {
-        state = undefined; // Reset the state to undefined, triggering a fresh initial state
+        state = undefined;
     }
     return appReducer(state, action);
 }

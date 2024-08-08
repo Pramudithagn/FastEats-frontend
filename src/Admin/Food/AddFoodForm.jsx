@@ -22,7 +22,7 @@ import {
   Snackbar,
 } from "@mui/material";
 import { uploadToCloudinary } from "../utils/uploadToCloudinary";
-import { createMenuItem } from "../../components/state/menu/Action";
+import { createFoodItem } from "../../components/state/food/Action";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -67,10 +67,10 @@ const initialValues = {
   ingredients: [],
 };
 
-const AddMenuForm = () => {
+const AddFoodForm = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { restaurant, ingredient, auth ,menu} = useSelector((store) => store);
+  const { restaurant, ingredient, auth ,food} = useSelector((store) => store);
   const [uploadImage, setUploadingImage] = useState("");
   const jwt = localStorage.getItem("jwt");
   const navigate = useNavigate()
@@ -80,9 +80,9 @@ const AddMenuForm = () => {
     onSubmit: (values) => {
       values.restaurantId = restaurant.usersRestaurant.id;
 
-      dispatch(createMenuItem({ menu: values, jwt: auth.jwt || jwt }));
+      dispatch(createFoodItem({ food: values, jwt: auth.jwt || jwt }));
       console.log("values ----- ", values);
-      navigate('/admin/restaurant/menu')
+      navigate('/admin/restaurant/food')
     },
   });
 
@@ -103,8 +103,8 @@ const AddMenuForm = () => {
   const [openSnackBar, setOpenSnackBar] = useState(false);
 
   useEffect(() => {
-    if (menu.message || menu.error) setOpenSnackBar(true);
-  }, [menu.message,menu.error]);
+    if (food.message || food.error) setOpenSnackBar(true);
+  }, [food.message,food.error]);
 
   const handleCloseSnackBar = () => {
     setOpenSnackBar(false);
@@ -115,7 +115,7 @@ const AddMenuForm = () => {
       <div className="lg:px-32 px-5 lg:flex  justify-center min-h-screen items-center pb-5">
         <div>
           <h1 className="font-bold text-2xl text-center py-2">
-            Add New Menu Item
+            Add New Food
           </h1>
           <form onSubmit={formik.handleSubmit} className="space-y-4 ">
             <Grid container spacing={2}>
@@ -313,7 +313,7 @@ const AddMenuForm = () => {
             </Grid> */}
             </Grid>
             <Button variant="contained" color="secondary" type="submit">
-              Create Menu Item
+              Create Food
             </Button>
           </form>
         </div>
@@ -328,14 +328,14 @@ const AddMenuForm = () => {
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <Alert
-          severity={menu.error ? "error" : "success"}
+          severity={food.error ? "error" : "success"}
           sx={{ width: "100%" }}
         >
-          {menu.message || auth.error}
+          {food.message || auth.error}
         </Alert>
       </Snackbar>
     </>
   );
 };
 
-export default AddMenuForm;
+export default AddFoodForm;
