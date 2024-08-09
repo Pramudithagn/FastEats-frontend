@@ -1,6 +1,7 @@
 import React from 'react'
 import {Button,MenuItem,Select,TextField,Typography} from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from '../state/auth/Action';
 import { useDispatch } from 'react-redux';
@@ -11,6 +12,20 @@ const initialValues = {
     password: "",
     role: "ROLE_CUSTOMER",
   };
+
+  const validationSchema = Yup.object({
+    fullName: Yup.string()
+      .required("Full Name is required")
+      .min(2, "Full Name must be at least 2 characters long"),
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    password: Yup.string()
+      .min(4, "Password must be at least 4 characters long")
+      .required("Password is required"),
+    role: Yup.string()
+      .required("Role is required")
+  });
 
       // const handleSubmit = (values) => {
     
@@ -37,7 +52,7 @@ export const RegistrationForm = () => {
         </Typography>
         <Formik
           initialValues={initialValues}
-        //   validationSchema={validationSchema}
+          validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
           <Form>
@@ -50,8 +65,8 @@ export const RegistrationForm = () => {
               name="fullName"
               id="fullName"
               autoComplete="fullName"
-            //   helperText={<ErrorMessage name="fullName" />}
-            />
+              helperText={<ErrorMessage name="fullName" component="div" style={{ color: "red" }} />}
+              />
             <Field
               as={TextField}
               variant="outlined"
@@ -61,8 +76,8 @@ export const RegistrationForm = () => {
               name="email"
               id="email"
               autoComplete="email"
-            //   helperText={<ErrorMessage name="email" />}
-            />
+              helperText={<ErrorMessage name="email" component="div" style={{ color: "red" }} />}
+              />
             <Field
               as={TextField}
               variant="outlined"
@@ -73,8 +88,8 @@ export const RegistrationForm = () => {
               type="password"
               id="password"
               autoComplete="current-password"
-            //   helperText={<ErrorMessage name="password" />}
-            />
+              helperText={<ErrorMessage name="password" component="div" style={{ color: "red" }} />}
+              />
             <Field
               className="mt-3"
               as={Select}
@@ -84,8 +99,8 @@ export const RegistrationForm = () => {
               name="role"
               id="role"
               // autoComplete="role"
-            //   helperText={<ErrorMessage name="role" />}
-            >
+              helperText={<ErrorMessage name="role" component="div" style={{ color: "red" }} />}
+              >
               <MenuItem value="ROLE_CUSTOMER">Customer</MenuItem>
               <MenuItem value="ROLE_OWNER">Restaurant Owner</MenuItem>
             </Field>

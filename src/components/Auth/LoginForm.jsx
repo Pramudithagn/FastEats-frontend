@@ -1,6 +1,7 @@
 import React from 'react'
 import {Button,TextField,Typography} from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../state/auth/Action';
@@ -10,6 +11,15 @@ const initialValues = {
     email: "",
     password: "",
   };
+
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    password: Yup.string()
+      .min(4, "Password must be at least 4 characters")
+      .required("Password is required"),
+  });
 
 export const LoginForm = () => {
 
@@ -29,7 +39,7 @@ export const LoginForm = () => {
         </Typography>
         <Formik
           initialValues={initialValues}
-        //   validationSchema={validationSchema}
+          validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
           <Form>
@@ -42,8 +52,8 @@ export const LoginForm = () => {
               name="email"
               id="email"
               autoComplete="email"
-            //   helperText={<ErrorMessage name="email" />}
-            />
+              helperText={<ErrorMessage name="email" component="div" style={{ color: "red" }} />}
+              />
             <Field
               as={TextField}
               variant="outlined"
@@ -54,8 +64,8 @@ export const LoginForm = () => {
               type="password"
               id="password"
               autoComplete="current-password"
-            //   helperText={<ErrorMessage name="password" />}
-            />
+              helperText={<ErrorMessage name="password" component="div" style={{ color: "red" }} />}
+              />
             <Button
               type="submit"
               fullWidth
