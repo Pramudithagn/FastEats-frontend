@@ -15,7 +15,7 @@ export const AdminRoutes = () => {
   const [showComponent, setShowComponent] = React.useState(false);
 
   React.useEffect(() => {
-    const delay = setTimeout(() => setShowComponent(true), 100);
+    const delay = setTimeout(() => setShowComponent(true), 200);
     return () => clearTimeout(delay);
   }, []);
 

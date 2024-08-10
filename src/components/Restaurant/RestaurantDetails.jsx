@@ -12,14 +12,14 @@ import {
 import React, { useEffect, useState } from "react";
 import PlaceIcon from "@mui/icons-material/Place";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import { MenuCard } from "./MenuCard";
+import { FoodCard } from "./FoodCard";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getRestaurantById,
   getRestaurantsCategory,
 } from "../state/restaurant/Action";
-import { getMenuItemsByRestaurantId } from "../state/menu/Action";
+import { getFoodItemsByRestaurantId } from "../state/food/Action";
 
 import { useTheme } from "@emotion/react";
 
@@ -41,7 +41,7 @@ export const RestaurantDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
-  const { auth, restaurant, menu } = useSelector((store) => store);
+  const { auth, restaurant, food } = useSelector((store) => store);
   const { id } = useParams();
   const [selectedCategory, setSelectedCategory] = useState("");
 
@@ -63,7 +63,7 @@ export const RestaurantDetails = () => {
 
   useEffect(() => {
     dispatch(
-      getMenuItemsByRestaurantId({
+      getFoodItemsByRestaurantId({
         jwt,
         restaurantId: id,
         seasonal: foodType === "seasonal",
@@ -74,7 +74,7 @@ export const RestaurantDetails = () => {
     );
   }, [selectedCategory, foodType]);
 
-  console.log("menu itemssss", menu.menuItems);
+  console.log("food itemssss", food.foodItems);
 
   const settings = {
     dots: false,
@@ -219,8 +219,8 @@ export const RestaurantDetails = () => {
         </div>
 
         <div className="space-y-5 pb-20 lg:w-[80%] lg:pl-10">
-          {menu.menuItems.map((item) => (
-            <MenuCard item={item} />
+          {food.foodItems.map((item) => (
+            <FoodCard item={item} />
           ))}
         </div>
       </section>

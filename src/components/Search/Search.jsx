@@ -3,17 +3,18 @@ import SearchIcon from "@mui/icons-material/Search";
 import { PopularCuisines } from "./PopularCuisines";
 import SearchDishCard from "./SearchDishCard";
 import { useDispatch, useSelector } from "react-redux";
-import { searchMenuItem } from "../state/menu/Action";
+import { searchFoodItem } from "../state/food/Action";
 import { topMeals } from "../Home/topMeals";
 
 const dish = [1, 1, 1, 1];
+
 const Search = () => {
   const dispatch = useDispatch();
-  const { menu,auth } = useSelector((store) => store);
+  const { food, auth } = useSelector((store) => store);
   const jwt=localStorage.getItem("jwt")
 
-  const handleSearchMenu = (keyword) => {
-    dispatch(searchMenuItem({keyword,jwt:auth.jwt || jwt }));
+  const handleSearchFood = (keyword) => {
+    dispatch(searchFoodItem({keyword,jwt:auth.jwt || jwt }));
   };
   
   return (
@@ -21,7 +22,7 @@ const Search = () => {
       <div className="relative py-5">
         <SearchIcon className="absolute top-[2rem] left-2" />
         <input
-          onChange={(e) => handleSearchMenu(e.target.value)}
+          onChange={(e) => handleSearchFood(e.target.value)}
           className="p-2 py-3 pl-12 w-full bg-[#242B2E] rounded-sm outline-none"
           type="text"
           placeholder="search food..."
@@ -36,7 +37,7 @@ const Search = () => {
         </div>
       </div>
       <div className=" mt-7">
-        {menu.search.map((item) => (
+        {food.search.map((item) => (
           <SearchDishCard item={item} />
         ))}
       </div>

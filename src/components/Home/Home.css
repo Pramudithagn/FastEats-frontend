@@ -1,14 +1,20 @@
 .banner{
-    background-image: url(https://img.freepik.com/free-photo/top-view-fast-food-mix-hamburger-doner-sandwich-chicken-nuggets-rice-vegetable-salad-chicken-sticks-caesar-salad-mushrooms-pizza-chicken-ragout-french-fries-mayo_141793-3997.jpg?t=st=1719593691~exp=1719597291~hmac=187350b15a431fa9f5a0f27109481cb342cce7f1a56850eaa9a4f2e60b60a45c&w=1480);
+    background-image: url(https://img.freepik.com/free-photo/delicious-hamburger-with-ketchups-mustard_23-2148290624.jpg?t=st=1722941717~exp=1722945317~hmac=072b485f108260f7861145f2af592ffef61032630d394b5664bb1fd7d62ab727&w=900);
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
     height: 90vh;
 }
 
+@media (max-width: 767px) {
+    .banner {
+      height: 50vh;
+    }
+}
+
 .cover{
     width: 100%;
     height: 90vh;
-    background-color: black;
-    opacity: 0.4;
+    background-color: #adb5bd;
+    opacity: 0;
 }

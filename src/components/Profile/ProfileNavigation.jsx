@@ -6,6 +6,7 @@ import EventIcon from "@mui/icons-material/Event";
 import LogoutIcon from "@mui/icons-material/Logout";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import HomeIcon from "@mui/icons-material/Home";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +15,8 @@ import { logout } from '../state/auth/Action';
 
 
 const menu = [
-    { title: "Home", icon: <HomeIcon /> },
+    // { title: "Home", icon: <HomeIcon /> },
+    { title: "Profile", icon: <AccountCircleIcon /> },
     { title: "Orders", icon: <ShoppingBagIcon /> },
     { title: "Favorites", icon: <FavoriteIcon /> },
     { title: "Address", icon: <LocationCityIcon /> },
@@ -38,7 +40,7 @@ export const ProfileNavigation = ({ open }) => {
         //   handleLogout();
           navigate("/");
         }
-        else if (item.title === "Home") navigate("/")
+        // else if (item.title === "Home") navigate("/")
         else navigate(`/my-profile/${item.title.toLowerCase()}`)
       };
 

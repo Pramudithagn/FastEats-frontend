@@ -9,6 +9,7 @@ import { Route, Routes } from 'react-router-dom'
 import Auth from '../components/Auth/Auth'
 import { PaymentSuccess } from '../components/Payment/PaymentSuccess'
 import Search from '../components/Search/Search'
+import Footer from '../components/Home/Footer'
 
 export const CustomerRoutes = () => {
   const [openSideBar, setOpenSideBar] = React.useState(false);
@@ -18,7 +19,10 @@ export const CustomerRoutes = () => {
 
   return (
     <div>
-    <NavBar handleOpenSide={handleOpenSide}/>
+    <div className="fixed top-0 left-0 w-full z-50">
+        <NavBar handleOpenSide={handleOpenSide} />
+    </div>
+    <div className="pt-16">
     <Routes>
         <Route exact path='/' element={<Home/>}/>
         <Route exact path='/account/:register' element={<Home/>}/>
@@ -32,6 +36,8 @@ export const CustomerRoutes = () => {
         <Route exact path='/password_change_success' element={<PasswordChangeSuccess/>}/>
         <Route exact path='/*' element={<NotFound/>}/> */}
     </Routes>
+    </div>
+    {/* <Footer/> */}
     <Auth/>
     </div>
   )
