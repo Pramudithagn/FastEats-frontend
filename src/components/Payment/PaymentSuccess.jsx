@@ -24,6 +24,7 @@ export const PaymentSuccess = () => {
           </p>
           <Button
             variant="contained"
+            color="secondary"
             className="my-5"
             sx={{ margin: "1rem 0rem" }}
             onClick={navigateToHome}
