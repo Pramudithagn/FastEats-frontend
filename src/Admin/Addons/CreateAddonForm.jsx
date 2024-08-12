@@ -4,17 +4,17 @@
 // import { useParams } from 'react-router-dom';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { createCategoryAction } from '../../components/state/restaurant/Action';
-// import { createIngredient } from '../../components/state/ingredient/Action';
+// import { createAddon } from '../../components/state/addon/Action';
 
-// const CreateIngredientForm = ({handleClose}) => {
+// const CreateAddonForm = ({handleClose}) => {
 //     const {id}=useParams();
 //     const dispatch=useDispatch();
-//     const {auth,restaurant,ingredient}=useSelector(store=>store)
+//     const {auth,restaurant,addon}=useSelector(store=>store)
 //     const jwt = localStorage.getItem("jwt")
 
 //   const [formData, setFormData] = useState({
 //     name: '',
-//     ingredientCategoryId:''
+//     addonCategoryId:''
 //   });
 
 //   const handleFormSubmit = (event) => {
@@ -23,11 +23,11 @@
 
 //     setFormData({
 //       name: '',
-//       ingredientCategoryId:''
+//       addonCategoryId:''
 //     })
 //     handleClose()
 //     const data={...formData,restaurantId:restaurant.usersRestaurant.id}
-//     dispatch(createIngredient({jwt:auth.jwt || jwt,data}))
+//     dispatch(createAddon({jwt:auth.jwt || jwt,data}))
     
 //   };
 
@@ -43,10 +43,10 @@
 //   return (
 //     <div className=''>
 //         <div className='p-5'>
-//           <h1 className='text-gray-400 text-center text-xl pb-10'>Create Ingredient</h1>
+//           <h1 className='text-gray-400 text-center text-xl pb-10'>Create Addon</h1>
 //         <form className="space-y-5" onSubmit={handleFormSubmit}>
 //       <TextField
-//         label="Ingredient"
+//         label="Addon"
 //         name="name"
 //         value={formData.name}
 //         onChange={handleInputChange}
@@ -57,13 +57,13 @@
 //         <Select
 //           labelId="demo-simple-select-label"
 //           id="demo-simple-select"
-//           value={formData.ingredientCategoryId}
+//           value={formData.addonCategoryId}
 //           label="Category"
-//           name='ingredientCategoryId'
+//           name='addonCategoryId'
 //           onChange={handleInputChange}
 //         >
           
-//           {ingredient.category.map((item)=> <MenuItem value={item.id}>{item.name}</MenuItem>)}
+//           {addon.category.map((item)=> <MenuItem value={item.id}>{item.name}</MenuItem>)}
 //         </Select>
 //       </FormControl>
      
@@ -76,33 +76,33 @@
 //   );
 // };
 
-// export default CreateIngredientForm;
+// export default CreateAddonForm;
 import React from 'react';
 import { TextField, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createIngredient } from '../../components/state/ingredient/Action';
+import { createAddon } from '../../components/state/addon/Action';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-const CreateIngredientForm = ({ handleClose }) => {
+const CreateAddonForm = ({ handleClose }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { auth, restaurant, ingredient } = useSelector(store => store);
+  const { auth, restaurant, addon } = useSelector(store => store);
   const jwt = localStorage.getItem("jwt");
 
   const validationSchema = Yup.object({
     name: Yup.string()
-      .required("Ingredient name is required")
-      .min(2, "Ingredient name must be at least 2 characters long"),
-    ingredientCategoryId: Yup.string()
+      .required("Addon name is required")
+      .min(2, "Addon name must be at least 2 characters long"),
+    addonCategoryId: Yup.string()
       .required("Select a category"),
   });
 
   const formik = useFormik({
     initialValues: {
       name: '',
-      ingredientCategoryId: '',
+      addonCategoryId: '',
     },
     validationSchema,
     onSubmit: (values) => {
@@ -111,7 +111,7 @@ const CreateIngredientForm = ({ handleClose }) => {
         ...values,
         restaurantId: restaurant.usersRestaurant.id,
       };
-      dispatch(createIngredient({ jwt: auth.jwt || jwt, data }));
+      dispatch(createAddon({ jwt: auth.jwt || jwt, data }));
       handleClose();
     },
   });
@@ -119,10 +119,10 @@ const CreateIngredientForm = ({ handleClose }) => {
   return (
     <div className=''>
       <div className='p-5'>
-        <h1 className='text-gray-400 text-center text-xl pb-10'>Create Ingredient</h1>
+        <h1 className='text-gray-400 text-center text-xl pb-10'>Create Addon</h1>
         <form className="space-y-5" onSubmit={formik.handleSubmit}>
           <TextField
-            label="Ingredient"
+            label="Addon"
             name="name"
             value={formik.values.name}
             onChange={formik.handleChange}
@@ -131,23 +131,23 @@ const CreateIngredientForm = ({ handleClose }) => {
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
           />
-          <FormControl fullWidth error={formik.touched.ingredientCategoryId && Boolean(formik.errors.ingredientCategoryId)}>
+          <FormControl fullWidth error={formik.touched.addonCategoryId && Boolean(formik.errors.addonCategoryId)}>
             <InputLabel id="category-select-label">Category</InputLabel>
             <Select
               labelId="category-select-label"
               id="category-select"
-              value={formik.values.ingredientCategoryId}
+              value={formik.values.addonCategoryId}
               label="Category"
-              name="ingredientCategoryId"
+              name="addonCategoryId"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             >
-              {ingredient.category.map((item) => (
+              {addon.category.map((item) => (
                 <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
               ))}
             </Select>
-            {formik.touched.ingredientCategoryId && formik.errors.ingredientCategoryId ? (
-              <div style={{ color: 'red', marginTop: '0.5rem' }}>{formik.errors.ingredientCategoryId}</div>
+            {formik.touched.addonCategoryId && formik.errors.addonCategoryId ? (
+              <div style={{ color: 'red', marginTop: '0.5rem' }}>{formik.errors.addonCategoryId}</div>
             ) : null}
           </FormControl>
 
@@ -160,4 +160,4 @@ const CreateIngredientForm = ({ handleClose }) => {
   );
 };
 
-export default CreateIngredientForm;
+export default CreateAddonForm;

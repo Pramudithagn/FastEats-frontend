@@ -4,11 +4,11 @@ import { Create } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createCategoryAction } from "../../components/state/restaurant/Action";
-import { createIngredientCategory } from "../../components/state/ingredient/Action";
+import { createAddonCategory } from "../../components/state/addon/Action";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const CreateIngredientCategoryForm = ({ handleClose }) => {
+const CreateAddonCategoryForm = ({ handleClose }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { auth, restaurant } = useSelector((store) => store);
@@ -16,7 +16,7 @@ const CreateIngredientCategoryForm = ({ handleClose }) => {
 
   const validationSchema = Yup.object({
     name: Yup.string()
-      .required("Please provide an ingredient category name")
+      .required("Please provide an addon category name")
       .min(2, "Category name must be at least 2 characters long"),
   });
 
@@ -31,7 +31,7 @@ const CreateIngredientCategoryForm = ({ handleClose }) => {
         name: values.name,
         restaurantId: restaurant.usersRestaurant.id,
       };
-      dispatch(createIngredientCategory({ data, jwt: auth.jwt || jwt }));
+      dispatch(createAddonCategory({ data, jwt: auth.jwt || jwt }));
       handleClose();
     },
   });
@@ -50,7 +50,7 @@ const CreateIngredientCategoryForm = ({ handleClose }) => {
   //     name: formData.name,
   //     restaurantId: restaurant.usersRestaurant.id,
   //   };
-  //   dispatch(createIngredientCategory({ data, jwt: auth.jwt || jwt }));
+  //   dispatch(createAddonCategory({ data, jwt: auth.jwt || jwt }));
   //   handleClose();
   // };
 
@@ -66,7 +66,7 @@ const CreateIngredientCategoryForm = ({ handleClose }) => {
     // <div className=" ">
     //   <div className="p-5">
     //     <h1 className="text-gray-400 text-center text-xl pb-10">
-    //       Create Ingredient Category
+    //       Create Addon Category
     //     </h1>
     //     <form className="space-y-5" onSubmit={handleFormSubmit}>
     //       <TextField
@@ -86,7 +86,7 @@ const CreateIngredientCategoryForm = ({ handleClose }) => {
     <div className=" ">
       <div className="p-5">
         <h1 className="text-gray-400 text-center text-xl pb-10">
-          Create Ingredient Category
+          Create Addon Category
         </h1>
         <form className="space-y-5" onSubmit={formik.handleSubmit}>
           <TextField
@@ -108,4 +108,4 @@ const CreateIngredientCategoryForm = ({ handleClose }) => {
   );
 };
 
-export default CreateIngredientCategoryForm;
+export default CreateAddonCategoryForm;

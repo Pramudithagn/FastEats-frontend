@@ -15,15 +15,15 @@ import {
   TableRow,
 } from "@mui/material";
 
-import CreateIngredientCategoryForm from "./CreateIngredientCategoryForm";
+import CreateAddonCategoryForm from "./CreateAddonCategoryForm";
 import { useEffect, useState } from "react";
-import CreateIngredientForm from "./CreateIngredientForm";
+import CreateAddonForm from "./CreateAddonForm";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getIngredientCategory,
-  getIngredientsOfRestaurant,
-  updateStockOfIngredient,
-} from "../../components/state/ingredient/Action";
+  getAddonCategory,
+  getAddonsOfRestaurant,
+  updateStockOfAddon,
+} from "../../components/state/addon/Action";
 import { getRestaurantById } from "../../components/state/restaurant/Action";
 
 const style = {
@@ -38,22 +38,22 @@ const style = {
   p: 4,
 };
 
-const Ingredients = () => {
+const Addons = () => {
   const dispatch = useDispatch();
-  const { auth, restaurant, ingredient } = useSelector((store) => store);
+  const { auth, restaurant, addon } = useSelector((store) => store);
   const jwt = localStorage.getItem("jwt");
 
-  console.log("ing",ingredient);
-  const [openIngredientCategory, setOpenIngredientCategory] = useState(false);
-  const handleOpenIngredientCategory = () => setOpenIngredientCategory(true);
-  const handleCloseIngredientCategory = () => setOpenIngredientCategory(false);
+  console.log("ing",addon);
+  const [openAddonCategory, setOpenAddonCategory] = useState(false);
+  const handleOpenAddonCategory = () => setOpenAddonCategory(true);
+  const handleCloseAddonCategory = () => setOpenAddonCategory(false);
 
-  const [openIngredient, setOpenIngredient] = useState(false);
-  const handleOpenIngredient = () => setOpenIngredient(true);
-  const handleCloseIngredient = () => setOpenIngredient(false);
+  const [openAddon, setOpenAddon] = useState(false);
+  const handleOpenAddon = () => setOpenAddon(true);
+  const handleCloseAddon = () => setOpenAddon(false);
 
   const handleUpdateStocke = (id) => {
-    dispatch(updateStockOfIngredient({ id, jwt }));
+    dispatch(updateStockOfAddon({ id, jwt }));
   };
 
   return (
@@ -62,14 +62,14 @@ const Ingredients = () => {
         <Grid  item xs={12} lg={8}>
           <Card className="mt-2 lg:ml-4">
             <CardHeader
-              title={"Ingredients"}
+              title={"Items"}
               sx={{
                 pt: 2,
                 alignItems: "center",
                 "& .MuiCardHeader-action": { mt: 0.6 },
               }}
               action={
-                <IconButton onClick={handleOpenIngredient}>
+                <IconButton onClick={handleOpenAddon}>
                   {" "}
                   <Create />
                 </IconButton>
@@ -89,7 +89,7 @@ const Ingredients = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody className="lg:overflow-y-auto">
-                  {ingredient.ingredients.map((item, index) => (
+                  {addon.addons.map((item, index) => (
                     <TableRow
                       className="cursor-pointer"
                       hover
@@ -101,7 +101,7 @@ const Ingredients = () => {
                       <TableCell>{item?.id}</TableCell>
 
                       <TableCell className="">{item.name}</TableCell>
-                      <TableCell className="">{item.ingredientCategory.name}</TableCell>
+                      <TableCell className="">{item.addonCategory.name}</TableCell>
 
                       <TableCell className="">
                         <Button
@@ -128,7 +128,7 @@ const Ingredients = () => {
                 "& .MuiCardHeader-action": { mt: 0.6 },
               }}
               action={
-                <IconButton onClick={handleOpenIngredientCategory}>
+                <IconButton onClick={handleOpenAddonCategory}>
                   {" "}
                   <Create />
                 </IconButton>
@@ -144,7 +144,7 @@ const Ingredients = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {ingredient.category?.map((item, index) => (
+                  {addon.category?.map((item, index) => (
                     <TableRow
                       className="cursor-pointer"
                       hover
@@ -166,27 +166,27 @@ const Ingredients = () => {
       </Grid>
 
       <Modal
-        open={openIngredient}
-        onClose={handleCloseIngredient}
+        open={openAddon}
+        onClose={handleCloseAddon}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         className="mx-20"
         
       >
         <Box sx={style}>
-          <CreateIngredientForm handleClose={handleCloseIngredient} />
+          <CreateAddonForm handleClose={handleCloseAddon} />
         </Box>
       </Modal>
 
       <Modal
-        open={openIngredientCategory}
-        onClose={handleCloseIngredientCategory}
+        open={openAddonCategory}
+        onClose={handleCloseAddonCategory}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <CreateIngredientCategoryForm
-            handleClose={handleCloseIngredientCategory}
+          <CreateAddonCategoryForm
+            handleClose={handleCloseAddonCategory}
           />
         </Box>
       </Modal>
@@ -194,4 +194,4 @@ const Ingredients = () => {
   );
 };
 
-export default Ingredients
+export default Addons
