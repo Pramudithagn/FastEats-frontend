@@ -12,19 +12,20 @@ import PersonIcon from "@mui/icons-material/Person";
 import ShopTwoIcon from "@mui/icons-material/ShopTwo";
 import { logout } from "../components/state/auth/Action";
 import EventIcon from "@mui/icons-material/Event";
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import InfoIcon from '@mui/icons-material/Info';
 import CategoryIcon from '@mui/icons-material/Category';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
+import DinnerDiningIcon from '@mui/icons-material/DinnerDining';
 
 const menu = [
   // { title: "Dashboard", icon: <Dashboard />, path: "/" },
-  { title: "Profile", icon: <Dashboard />, path: "/" },
+  { title: "Profile", icon: <PersonIcon />, path: "/" },
   { title: "Orders", icon: <ShoppingBagIcon />, path: "/orders" },
-  { title: "Foods", icon: <ShopTwoIcon />, path: "/food" },
+  { title: "Foods", icon: <DinnerDiningIcon />, path: "/food" },
   { title: "Food Category", icon: <CategoryIcon />, path: "/category" },
-  { title: "Ingredients", icon: <FastfoodIcon />, path: "/ingredients" },
+  { title: "Add-ons", icon: <FastfoodIcon />, path: "/addons" },
   { title: "Events", icon: <EventIcon />, path: "/event" },
-  { title: "Details", icon: <AdminPanelSettingsIcon />, path: "/details" },
+  { title: "Details", icon: <InfoIcon />, path: "/details" },
   { title: "Logout", icon: <LogoutIcon />, path: "/" },
   
 ];

@@ -8,11 +8,11 @@ import RestaurantsFood from "./Food/RestaurantsFood";
 import AddFoodForm from "./Food/AddFoodForm";
 import CreateRestaurantForm from "./CreateRestaurant/CreateRestaurantForm";
 import FoodCategory from "./FoodCategory/FoodCategory";
-import Ingredients from "./Ingredients/Ingredients";
+import Addons from "./Addons/Addons";
 import { useDispatch, useSelector } from "react-redux";
 import Details from "./Details/Details";
 import Events from "./Events/Events";
-import { getIngredientCategory, getIngredientsOfRestaurant } from "../components/state/ingredient/Action";
+import { getAddonCategory, getAddonsOfRestaurant } from "../components/state/addon/Action";
 import { getRestaurantsCategory } from "../components/state/restaurant/Action";
 import { fetchRestaurantsOrder } from "../components/state/restaurant.order/Action";
 import AdminNavbar from "./AdminNavbar";
@@ -24,16 +24,16 @@ export const Admin = () => {
   const [openSideBar, setOpenSideBar] = useState(false);
   const handleOpenSideBar = () => setOpenSideBar(true);
   const handleCloseSideBar = () => setOpenSideBar(false);
-  const { auth, restaurant, ingredients } = useSelector((store) => store);
+  const { auth, restaurant, addons } = useSelector((store) => store);
   const jwt = localStorage.getItem("jwt");
 
   useEffect(() => {
     if (restaurant.usersRestaurant) {
       dispatch(
-        getIngredientCategory({ jwt, id: restaurant.usersRestaurant?.id })
+        getAddonCategory({ jwt, id: restaurant.usersRestaurant?.id })
       );
       dispatch(
-        getIngredientsOfRestaurant({ jwt, id: restaurant.usersRestaurant?.id })
+        getAddonsOfRestaurant({ jwt, id: restaurant.usersRestaurant?.id })
       );
       dispatch(
         getRestaurantsCategory({jwt: auth.jwt || jwt, restaurantId: restaurant.usersRestaurant?.id })
@@ -62,8 +62,8 @@ export const Admin = () => {
             <Route path="/add-restaurant" element={<CreateRestaurantForm />} />
             <Route path="/event" element={<Events />} />
 
-            {/* <Route path="/event" element={<IngredientTable />} /> */}
-            <Route path="/ingredients" element={<Ingredients />} />
+            {/* <Route path="/event" element={<AddonTable />} /> */}
+            <Route path="/addons" element={<Addons />} />
             <Route path="/category" element={<FoodCategory />} />
             <Route path="/details" element={<Details />} />
           </Routes>
