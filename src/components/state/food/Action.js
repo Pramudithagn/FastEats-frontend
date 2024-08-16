@@ -22,7 +22,7 @@ import {
   UPDATE_FOOD_ITEMS_AVAILABILITY_SUCCESS,
 } from "./ActionType";
 
-// localhost:5454/api/admin/ingredients/food/16
+// localhost:5454/api/admin/addons/food/16
 
 export const createFoodItem = ({food,jwt}) => {
   return async (dispatch) => {
@@ -84,7 +84,7 @@ export const searchFoodItem = ({keyword,jwt}) => {
   };
 };
 
-export const getAllIngredientsOfFoodItem = (reqData) => {
+export const getAllAddonsOfFoodItem = (reqData) => {
   return async (dispatch) => {
     dispatch(getFoodItemsByRestaurantIdRequest());
     try {

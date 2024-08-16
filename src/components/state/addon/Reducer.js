@@ -7,17 +7,17 @@ import {
 } from "./ActionType";
 
 const initialState = {
-  ingredients: [],
+  addons: [],
   update: null,
   category: [],
 };
 
-export const ingredientReducer = (state = initialState, action) => {
+export const addonReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_INGREDIENTS:
       return {
         ...state,
-        ingredients: action.payload,
+        addons: action.payload,
       };
     case GET_INGREDIENT_CATEGORY_SUCCESS:
       return {
@@ -32,13 +32,13 @@ export const ingredientReducer = (state = initialState, action) => {
     case CREATE_INGREDIENT_SUCCESS:
       return {
         ...state,
-        ingredients: [...state.ingredients, action.payload],
+        addons: [...state.addons, action.payload],
       };
     case UPDATE_STOCK:
       return {
         ...state,
         update: action.payload,
-        ingredients: state.ingredients.map((item) =>
+        addons: state.addons.map((item) =>
           item.id === action.payload.id ? action.payload : item
         ),
       };

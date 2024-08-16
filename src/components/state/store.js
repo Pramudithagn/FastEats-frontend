@@ -6,7 +6,7 @@ import foodItemReducer from "./food/Reducer";
 import cartReducer from "./cart/Reducer";
 import { orderReducer } from "./order/Reducer";
 import restaurantsOrderReducer from "./restaurant.order/Reducer";
-import { ingredientReducer } from "./ingredient/Reducer";
+import { addonReducer } from "./addon/Reducer";
 import { LOGOUT } from "./auth/ActionType";
 
 const appReducer = combineReducers({
@@ -16,7 +16,7 @@ const appReducer = combineReducers({
     cart: cartReducer,
     order: orderReducer,
     restaurantOrder: restaurantsOrderReducer,
-    ingredient: ingredientReducer
+    addon: addonReducer
 })
 
 const rootReducer = (state, action) => {
