@@ -20,7 +20,7 @@ import {
 
 const Details = () => {
   const dispatch = useDispatch();
-  const { auth, restaurant, ingredients } = useSelector((store) => store);
+  const { auth, restaurant, addons } = useSelector((store) => store);
   const jwt = localStorage.getItem("jwt");
   const [loading, setLoading] = React.useState(false);
 

@@ -64,13 +64,13 @@ const initialValues = {
   vegetarian: true,
   seasonal: false,
   quantity: 0,
-  ingredients: [],
+  addons: [],
 };
 
 const AddFoodForm = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { restaurant, ingredient, auth ,food} = useSelector((store) => store);
+  const { restaurant, addon, auth ,food} = useSelector((store) => store);
   const [uploadImage, setUploadingImage] = useState("");
   const jwt = localStorage.getItem("jwt");
   const navigate = useNavigate()
@@ -228,20 +228,20 @@ const AddFoodForm = () => {
 
               <Grid item xs={12}>
                 <FormControl fullWidth>
-                  <InputLabel id="ingredient-multiple-chip-label">
-                    Ingredients
+                  <InputLabel id="addon-multiple-chip-label">
+                    Addons
                   </InputLabel>
                   <Select
-                    labelId="ingredient-multiple-chip-label"
-                    id="ingredient-multiple-chip"
+                    labelId="addon-multiple-chip-label"
+                    id="addon-multiple-chip"
                     multiple
-                    name="ingredients"
-                    value={formik.values.ingredients}
+                    name="addons"
+                    value={formik.values.addons}
                     onChange={formik.handleChange}
                     input={
                       <OutlinedInput
                         id="select-multiple-chip"
-                        label="Ingredients"
+                        label="Addons"
                       />
                     }
                     renderValue={(selected) => (
@@ -253,7 +253,7 @@ const AddFoodForm = () => {
                     )}
                     MenuProps={MenuProps}
                   >
-                    {ingredient.ingredients?.map((item) => (
+                    {addon.addons?.map((item) => (
                       <MenuItem
                         key={item.id}
                         value={item}

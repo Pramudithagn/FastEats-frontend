@@ -21,9 +21,9 @@ import {
   
   import { useDispatch, useSelector } from "react-redux";
   import { deleteFoodAction, getFoodItemsByRestaurantId, updateFoodItemsAvailability } from "../../components/state/food/Action";
-  import { updateStockOfIngredient } from "../../components/state/ingredient/Action";
+  import { updateStockOfAddon } from "../../components/state/addon/Action";
   import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule";
-  import { categorizeIngredients } from "../../components/util/categorizeIngredients";
+  import { categorizeAddons } from "../../components/util/categorizeAddons";
   import DeleteIcon from "@mui/icons-material/Delete";
   import { Create, Remove } from "@mui/icons-material";
   
@@ -31,7 +31,7 @@ import {
     const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { food, ingredient, restaurant, auth } = useSelector((store) => store);
+    const { food, addon, restaurant, auth } = useSelector((store) => store);
     const { id } = useParams();
     const jwt = localStorage.getItem("jwt");
   
@@ -48,12 +48,12 @@ import {
           })
         );
       }
-    }, [ingredient.update, restaurant.usersRestaurant]);
+    }, [addon.update, restaurant.usersRestaurant]);
   
     // console.log(
     //   "-------- ",
-    //   food.foodItems[1].ingredient,
-    //   categorizeIngredients(food.foodItems[1].ingredients)
+    //   food.foodItems[1].addon,
+    //   categorizeAddons(food.foodItems[1].addons)
     // );
   
     const handleFoodAvialability = (foodId) => {
@@ -89,7 +89,7 @@ import {
                   <TableCell>Image</TableCell>
                   <TableCell>Title</TableCell>
                   {/* <TableCell sx={{ textAlign: "center" }}>Category</TableCell> */}
-                  {!isDashboard && <TableCell sx={{ textAlign: "" }}>Ingredients</TableCell>}
+                  {!isDashboard && <TableCell sx={{ textAlign: "" }}>Addons</TableCell>}
                   <TableCell sx={{ textAlign: "center" }}>Price</TableCell>
                   {/* <TableCell sx={{ textAlign: "center" }}>Quantity</TableCell> */}
   
@@ -127,17 +127,17 @@ import {
   
                     {!isDashboard && (
                       <TableCell>
-                        {Object.keys(categorizeIngredients(item?.ingredients))?.map((category) => (
+                        {Object.keys(categorizeAddons(item?.addons))?.map((category) => (
                           <div key={category}>
                             <p className="font-semibold">{category}</p>
                             <div className="pl-5">
-                              {categorizeIngredients(item?.ingredients)[category].map((ingredient, index) => (
-                                <div key={ingredient.id} className="flex gap-1 items-center">
+                              {categorizeAddons(item?.addons)[category].map((addon, index) => (
+                                <div key={addon.id} className="flex gap-1 items-center">
                                   <div>
                                     <HorizontalRuleIcon sx={{ fontSize: "1rem" }} />
                                   </div>
-                                  <div key={ingredient.id} className="flex gap-4 items-center">
-                                    <p>{ingredient.name}</p>
+                                  <div key={addon.id} className="flex gap-4 items-center">
+                                    <p>{addon.name}</p>
                                   </div>
                                 </div>
                               ))}

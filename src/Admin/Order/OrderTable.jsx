@@ -89,7 +89,7 @@ import {
                   <TableCell>Price</TableCell>
   
                   <TableCell>Name</TableCell>
-                  {!isDashboard && <TableCell>Ingredients</TableCell>}
+                  {!isDashboard && <TableCell>Addons</TableCell>}
                   {!isDashboard && <TableCell>Status</TableCell>}
                   {!isDashboard && <TableCell sx={{ textAlign: "center" }}>Update</TableCell>}
                   {/* {!isDashboard && (
@@ -130,7 +130,7 @@ import {
                       <TableCell className="space-y-2">
                         {item.items.map((orderItem) => (
                           <div className="flex gap-1 flex-wrap">
-                            {orderItem.ingredients?.map((ingre) => (
+                            {orderItem.addons?.map((ingre) => (
                               <Chip label={ingre} size="small"/>
                             ))}
                           </div>
