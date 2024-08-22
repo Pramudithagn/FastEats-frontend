@@ -11,38 +11,38 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { categorizeIngredients } from "../util/categorizeIngredients";
+import { categorizeAddons } from "../util/categorizeAddons";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../state/cart/Action";
 import { grey } from "@mui/material/colors";
 
-const ingredientItems = [
+const addonItems = [
   {
     category: "Protien",
-    ingredients: ["Chicken breast", "Bacon strips"],
+    addons: ["Chicken breast", "Bacon strips"],
   },
   {
     category: "Nuts & seeds",
-    ingredients: ["Cashews"],
+    addons: ["Cashews"],
   },
 ];
 
 export const FoodCard = ({ item }) => {
   const dispatch = useDispatch();
-  const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [selectedAddons, setSelectedAddons] = useState([]);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   // console.log("heyyy",item)
 
   const handleCheckboxChange = (itemName) => {
-    if (selectedIngredients.includes(itemName)) {
+    if (selectedAddons.includes(itemName)) {
       console.log("yes");
-      setSelectedIngredients(
-        selectedIngredients.filter((item) => item !== itemName)
+      setSelectedAddons(
+        selectedAddons.filter((item) => item !== itemName)
       );
     } else {
       console.log("no");
-      setSelectedIngredients([...selectedIngredients, itemName]);
+      setSelectedAddons([...selectedAddons, itemName]);
     }
   };
 
@@ -54,7 +54,7 @@ export const FoodCard = ({ item }) => {
       cartItem: {
         foodId: item.id,
         quantity: 1,
-        ingredients: selectedIngredients,
+        addons: selectedAddons,
       },
     };
     console.log(data);
@@ -95,24 +95,24 @@ export const FoodCard = ({ item }) => {
         <AccordionDetails>
           <form onSubmit={handleAddItemToCart}>
             <div className="flex gap-5 flex-wrap">
-              {Object.keys(categorizeIngredients(item.ingredients)).map(
-                (ingredientCategory) => (
+              {Object.keys(categorizeAddons(item.addons)).map(
+                (addonCategory) => (
                   <div>
-                    <p>{ingredientCategory}</p>
+                    <p>{addonCategory}</p>
                     <FormGroup>
-                      {categorizeIngredients(item.ingredients)[
-                        ingredientCategory
-                      ].map((ingredient) => (
+                      {categorizeAddons(item.addons)[
+                        addonCategory
+                      ].map((addon) => (
                         <FormControlLabel
                           control={
                             <Checkbox
                               color="blue"
                               onChange={() =>
-                                handleCheckboxChange(ingredient.name)
+                                handleCheckboxChange(addon.name)
                               }
                             />
                           }
-                          label={ingredient.name}
+                          label={addon.name}
                         />
                       ))}
                     </FormGroup>

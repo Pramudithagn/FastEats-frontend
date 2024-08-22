@@ -97,7 +97,7 @@ const Navbar = ({handleOpenSide}) => {
     // auth.user?.role === "ROLE_ADMIN" || 
     auth.user?.role === "ROLE_OWNER"
       ? navigate("/admin/restaurant")
-      : navigate("/my-profile/profile");
+      : navigate("/my-profile/");
   };
 
   const handleCloseAuthModel = () => {

@@ -69,9 +69,9 @@ export const CartItem = ({item}) => {
       </div>
 
       <div className="pt-3 space-x-2">
-        {item.ingredients?.map((ingredient) => (
+        {item.addons?.map((addon) => (
 
-          <Chip label={ingredient} />
+          <Chip label={addon} />
         ))}
       </div>
 

@@ -22,7 +22,7 @@ export const Profile = ({handleCloseSide, openSideBar}) => {
       </div>
       <div className="lg:w-[80%] h-lvh">
         <Routes>
-          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/" element={<UserProfile />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/address" element={<Addresses />} />
           <Route path="/favorites" element={<Favorites />} />

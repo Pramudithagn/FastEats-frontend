@@ -40,7 +40,7 @@ export const ProfileNavigation = ({ open }) => {
         //   handleLogout();
           navigate("/");
         }
-        // else if (item.title === "Home") navigate("/")
+        else if (item.title === "Profile") navigate("/my-profile/")
         else navigate(`/my-profile/${item.title.toLowerCase()}`)
       };
 
