@@ -1,11 +1,11 @@
-import * as actionTypes from './ActionType';
+import * as actionTypes from "./ActionType";
 
 const initialState = {
   foodItems: [],
   loading: false,
   error: null,
-  search:[],
-  message:null
+  search: [],
+  message: null,
 };
 
 const foodItemReducer = (state = initialState, action) => {
@@ -19,14 +19,14 @@ const foodItemReducer = (state = initialState, action) => {
         ...state,
         loading: true,
         error: null,
-        message:null
+        message: null,
       };
     case actionTypes.CREATE_FOOD_ITEM_SUCCESS:
       return {
         ...state,
         loading: false,
         foodItems: [...state.foodItems, action.payload],
-        message:"Food Created Successfully"
+        message: "Food Created Successfully",
       };
     case actionTypes.GET_FOOD_ITEMS_BY_RESTAURANT_ID_SUCCESS:
       return {
@@ -42,20 +42,20 @@ const foodItemReducer = (state = initialState, action) => {
           (foodItem) => foodItem.id !== action.payload
         ),
       };
-      case actionTypes.UPDATE_FOOD_ITEMS_AVAILABILITY_SUCCESS:
-        console.log("updated items id ",action.payload.id)
+    case actionTypes.UPDATE_FOOD_ITEMS_AVAILABILITY_SUCCESS:
+      console.log("updated items id ", action.payload.id);
       return {
         ...state,
         loading: false,
-        foodItems: state.foodItems.map(
-          (foodItem) => foodItem.id === action.payload.id?action.payload:foodItem
+        foodItems: state.foodItems.map((foodItem) =>
+          foodItem.id === action.payload.id ? action.payload : foodItem
         ),
       };
-      case actionTypes.SEARCH_FOOD_ITEM_SUCCESS:
+    case actionTypes.SEARCH_FOOD_ITEM_SUCCESS:
       return {
         ...state,
         loading: false,
-        search:action.payload
+        search: action.payload,
       };
     case actionTypes.CREATE_FOOD_ITEM_FAILURE:
     case actionTypes.GET_FOOD_ITEMS_BY_RESTAURANT_ID_FAILURE:
@@ -66,7 +66,7 @@ const foodItemReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload,
-        message:null
+        message: null,
       };
     default:
       return state;

@@ -1,12 +1,9 @@
 import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
 
 export const UserProfile = () => {
   const { auth } = useSelector((store) => store);
-  console.log(auth);
-  const handleLogout = () => {};
 
   return (
     <div>
@@ -21,8 +18,6 @@ export const UserProfile = () => {
             Account type :{" "}
             {auth.user.role === "ROLE_CUSTOMER" ? "Customer" : "Owner"}
           </p>
-
-          {/* <Button onClick={handleLogout} variant='contained' sx={{margin:"2rem 0rem"}}>Logout</Button> */}
         </div>
       </div>
     </div>

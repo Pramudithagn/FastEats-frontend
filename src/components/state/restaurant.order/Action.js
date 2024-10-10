@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   UPDATE_ORDER_STATUS_REQUEST,
   UPDATE_ORDER_STATUS_SUCCESS,
@@ -9,13 +8,15 @@ import {
 } from "./ActionType.js";
 import { api } from "../../../config/api.js";
 
-export const updateOrderStatus = ({orderId, orderStatus, jwt}) => {
+export const updateOrderStatus = ({ orderId, orderStatus, jwt }) => {
   return async (dispatch) => {
     try {
       dispatch({ type: UPDATE_ORDER_STATUS_REQUEST });
 
       const response = await api.put(
-        `/api/admin/order/${orderId}/${orderStatus}`,{},{
+        `/api/admin/order/${orderId}/${orderStatus}`,
+        {},
+        {
           headers: {
             Authorization: `Bearer ${jwt}`,
           },
@@ -24,30 +25,26 @@ export const updateOrderStatus = ({orderId, orderStatus, jwt}) => {
 
       const updatedOrder = response.data;
 
-      console.log("udpdated order ", updatedOrder);
-
       dispatch({
         type: UPDATE_ORDER_STATUS_SUCCESS,
         payload: updatedOrder,
       });
     } catch (error) {
-      console.log("catch error ", error);
+      console.error("catch error ", error);
       dispatch({ type: UPDATE_ORDER_STATUS_FAILURE, error });
     }
   };
 };
 
-export const fetchRestaurantsOrder = ({restaurantId, orderStatus, jwt}) => { //giving order status just because if owner want to filter based on status
+export const fetchRestaurantsOrder = ({ restaurantId, orderStatus, jwt }) => {
   return async (dispatch) => {
     try {
-      console.log("restaurants order status-- ", orderStatus);
-
       dispatch({ type: GET_RESTAURANTS_ORDER_REQUEST });
 
       const { data } = await api.get(
-        `/api/admin/order/restaurant/${restaurantId}`,{
-          // params: { order_status:orderStatus},
-          params: {orderStatus},
+        `/api/admin/order/restaurant/${restaurantId}`,
+        {
+          params: { orderStatus },
           headers: {
             Authorization: `Bearer ${jwt}`,
           },
@@ -55,7 +52,6 @@ export const fetchRestaurantsOrder = ({restaurantId, orderStatus, jwt}) => { //g
       );
 
       const orders = data;
-      console.log("restaurants order ------ ", orders);
       dispatch({
         type: GET_RESTAURANTS_ORDER_SUCCESS,
         payload: orders,

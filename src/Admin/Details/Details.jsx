@@ -1,26 +1,21 @@
 import {
   Backdrop,
-  Badge,
   Button,
   Card,
   CardContent,
   CardHeader,
   CircularProgress,
-  Fade,
   Grid,
 } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import {
-  updateRestaurant,
-  updateRestaurantStatus,
-} from "../../components/state/restaurant/Action";
+import { updateRestaurantStatus } from "../../components/state/restaurant/Action";
 
 const Details = () => {
   const dispatch = useDispatch();
-  const { auth, restaurant, addons } = useSelector((store) => store);
+  const { auth, restaurant } = useSelector((store) => store);
   const jwt = localStorage.getItem("jwt");
   const [loading, setLoading] = React.useState(false);
 
@@ -34,7 +29,7 @@ const Details = () => {
     );
     setLoading(false);
   };
-  
+
   return loading === true ? (
     <CircularProgress />
   ) : (
@@ -47,7 +42,6 @@ const Details = () => {
           <Button
             onClick={handleRestaurantStatus}
             size="large"
-            // sx={{ padding: "1rem 2rem" }}
             className="py-[1rem] px-[2rem]"
             variant="contained"
             color={restaurant.usersRestaurant?.open ? "error" : "primary"}
@@ -66,7 +60,7 @@ const Details = () => {
             <CardContent>
               <div className="space-y-4 text-gray-200">
                 <div className="flex">
-                <p className="w-32 lg:w-40">Owner</p>
+                  <p className="w-32 lg:w-40">Owner</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -74,7 +68,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                <p className="w-32 lg:w-40">Name</p>
+                  <p className="w-32 lg:w-40">Name</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -82,7 +76,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                <p className="w-32 lg:w-40">Cuisine Type</p>
+                  <p className="w-32 lg:w-40">Cuisine Type</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -90,7 +84,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                <p className="w-32 lg:w-40">Opening Hours</p>
+                  <p className="w-32 lg:w-40">Opening Hours</p>
                   <p className="text-gray-400 text-sm">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -98,7 +92,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                <p className="w-32 lg:w-40">Status</p>
+                  <p className="w-32 lg:w-40">Status</p>
                   <div className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -133,7 +127,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                <p className="w-32 lg:w-40">City</p>
+                  <p className="w-32 lg:w-40">City</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -141,7 +135,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                <p className="w-32 lg:w-40">Postal Code</p>
+                  <p className="w-32 lg:w-40">Postal Code</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -149,7 +143,7 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                <p className="w-32 lg:w-40">Country</p>
+                  <p className="w-32 lg:w-40">Country</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -176,16 +170,15 @@ const Details = () => {
                   </p>
                 </div>
                 <div className="flex">
-                <p className="w-24 lg:w-40">Phone</p>
+                  <p className="w-24 lg:w-40">Phone</p>
                   <p className="text-gray-400">
                     {" "}
                     <span className="pr-5">-</span>
-                    {/* {" +94"} */}
                     {restaurant.usersRestaurant?.contactInformation.phone}
                   </p>
                 </div>
                 <div className="flex items-center">
-                <p className="w-24 lg:w-40">Social</p>
+                  <p className="w-24 lg:w-40">Social</p>
                   <div className="text-gray-400 flex items-center pb-3">
                     {" "}
                     <span className="pr-5">-</span>{" "}
@@ -210,22 +203,6 @@ const Details = () => {
                     </a>
                   </div>
                 </div>
-                {/* <div className="flex">
-                  <p className="w-40">Twitter</p>
-                  <p className="text-gray-400">
-                    {" "}
-                    <span className="pr-5">-</span>{" "}
-                    <a
-                      href={
-                        restaurant.usersRestaurant?.contactInformation.instagram
-                      }
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <TwitterIcon sx={{fontSize:"3rem"}} />
-                    </a>
-                  </p>
-                </div> */}
               </div>
             </CardContent>
           </Card>

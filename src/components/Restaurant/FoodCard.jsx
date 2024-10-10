@@ -16,32 +16,26 @@ import { useDispatch } from "react-redux";
 import { addItemToCart } from "../state/cart/Action";
 import { grey } from "@mui/material/colors";
 
-const addonItems = [
-  {
-    category: "Protien",
-    addons: ["Chicken breast", "Bacon strips"],
-  },
-  {
-    category: "Nuts & seeds",
-    addons: ["Cashews"],
-  },
-];
+// const addonItems = [
+//   {
+//     category: "Protien",
+//     addons: ["Chicken breast", "Bacon strips"],
+//   },
+//   {
+//     category: "Nuts & seeds",
+//     addons: ["Cashews"],
+//   },
+// ];
 
 export const FoodCard = ({ item }) => {
   const dispatch = useDispatch();
   const [selectedAddons, setSelectedAddons] = useState([]);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
-  // console.log("heyyy",item)
-
   const handleCheckboxChange = (itemName) => {
     if (selectedAddons.includes(itemName)) {
-      console.log("yes");
-      setSelectedAddons(
-        selectedAddons.filter((item) => item !== itemName)
-      );
+      setSelectedAddons(selectedAddons.filter((item) => item !== itemName));
     } else {
-      console.log("no");
       setSelectedAddons([...selectedAddons, itemName]);
     }
   };
@@ -100,21 +94,21 @@ export const FoodCard = ({ item }) => {
                   <div>
                     <p>{addonCategory}</p>
                     <FormGroup>
-                      {categorizeAddons(item.addons)[
-                        addonCategory
-                      ].map((addon) => (
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              color="blue"
-                              onChange={() =>
-                                handleCheckboxChange(addon.name)
-                              }
-                            />
-                          }
-                          label={addon.name}
-                        />
-                      ))}
+                      {categorizeAddons(item.addons)[addonCategory].map(
+                        (addon) => (
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                color="blue"
+                                onChange={() =>
+                                  handleCheckboxChange(addon.name)
+                                }
+                              />
+                            }
+                            label={addon.name}
+                          />
+                        )
+                      )}
                     </FormGroup>
                   </div>
                 )

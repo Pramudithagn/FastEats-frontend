@@ -1,14 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { NavBar } from "./components/NavBar/NavBar";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { darkTheme } from "./Theme/DarkTheme";
-import { Home } from "./components/Home/Home";
-import { RestaurantDetails } from "./components/Restaurant/RestaurantDetails";
-import { Cart } from "./components/Cart/Cart";
-import { CartItem } from "./components/Cart/CartItem";
-import { Profile } from "./components/Profile/Profile";
-import { CustomerRoutes } from "./Routes/CustomerRoutes";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "./components/state/auth/Action";
@@ -42,7 +34,7 @@ function App() {
       {/* <CartItem/> */}
       {/* <Profile/> */}
       {/* <CustomerRoutes /> */}
-      <Routers/>
+      <Routers />
     </ThemeProvider>
   );
 }

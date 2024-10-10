@@ -11,11 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { uploadToCloudinary } from "../utils/uploadToCloudinary";
 import { CircularProgress, IconButton } from "@mui/material";
 
-import {
-  LocalizationProvider,
-  DateTimePicker,
-  TimePicker,
-} from "@mui/x-date-pickers";
+import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 
@@ -32,7 +28,7 @@ const initialValues = {
   phone: "",
   facebook: "",
   instagram: "",
-  openingTime: dayjs(), 
+  openingTime: dayjs(),
   closingTime: dayjs(),
 
   images: [],
@@ -45,10 +41,16 @@ const validationSchema = Yup.object({
   streetAddress: Yup.string().required("Street Address is required"),
   city: Yup.string().required("City is required"),
   stateProvince: Yup.string().required("State/Province is required"),
-  postalCode: Yup.number().required("Postal Code is required").typeError("Postal Code must be a number"),
+  postalCode: Yup.number()
+    .required("Postal Code is required")
+    .typeError("Postal Code must be a number"),
   country: Yup.string().required("Country is required"),
-  email: Yup.string().email("Invalid email address").required("Email is required"),
-  phone: Yup.number().required("Phone number is required").typeError("Phone number must be a number"),
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+  phone: Yup.number()
+    .required("Phone number is required")
+    .typeError("Phone number must be a number"),
   facebook: Yup.string().url("Invalid URL"),
   instagram: Yup.string().url("Invalid URL"),
   openingTime: Yup.date().required("Opening time is required"),
@@ -90,7 +92,6 @@ const CreateRestaurantForm = () => {
 
   const handleTimeChange = (time, timeType) => {
     if (time && dayjs(time).isValid()) {
-      // const formattedTime = dayjs(time).format("hh:mm A");
       formik.setFieldValue(timeType, time);
     }
   };
@@ -98,7 +99,6 @@ const CreateRestaurantForm = () => {
   const formik = useFormik({
     initialValues,
     validationSchema,
-    // initialValues: formValues,
     onSubmit: handleSubmit,
   });
 
@@ -194,8 +194,13 @@ const CreateRestaurantForm = () => {
                 onChange={formik.handleChange}
                 value={formik.values.description}
                 onBlur={formik.handleBlur}
-                error={formik.touched.description && Boolean(formik.errors.description)}
-                helperText={formik.touched.description && formik.errors.description}
+                error={
+                  formik.touched.description &&
+                  Boolean(formik.errors.description)
+                }
+                helperText={
+                  formik.touched.description && formik.errors.description
+                }
               />
             </Grid>
             <Grid item xs={6}>
@@ -208,57 +213,35 @@ const CreateRestaurantForm = () => {
                 onChange={formik.handleChange}
                 value={formik.values.cuisineType}
                 onBlur={formik.handleBlur}
-                error={formik.touched.cuisineType && Boolean(formik.errors.cuisineType)}
-                helperText={formik.touched.cuisineType && formik.errors.cuisineType}
+                error={
+                  formik.touched.cuisineType &&
+                  Boolean(formik.errors.cuisineType)
+                }
+                helperText={
+                  formik.touched.cuisineType && formik.errors.cuisineType
+                }
               />
             </Grid>
-            {/* <Grid item xs={6}>
-              <TextField
-                fullWidth
-                id="openingHours"
-                name="openingHours"
-                label="Opening Hours"
-                variant="outlined"
-                onChange={formik.handleChange}
-                value={formik.values.openingHours}
-              />
-            </Grid> */}
 
-            {/* <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DateTimePicker
-              label="Opening Hours Start"
-              value={formValues.openingHours.start}
-              onChange={(date) => handleDateChange(date, "start")}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
-        </Grid>
-        <Grid item xs={6}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DateTimePicker
-              label="Opening Hours End"
-              value={formValues.openingHours.end}
-              onChange={(date) => handleDateChange(date, "end")}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
-        </Grid>
-      </Grid> */}
             <Grid item xs={6}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <TimePicker
                   label="Opening Time"
-                  value={formik.values.openingTime} // Ensure this is a dayjs object or null
+                  value={formik.values.openingTime}
                   onChange={(time) => handleTimeChange(time, "openingTime")}
-                  renderInput={(props) => 
-                  <TextField 
-                    {...props} 
-                    fullWidth
-                    error={formik.touched.openingTime && Boolean(formik.errors.openingTime)}
-                    helperText={formik.touched.openingTime && formik.errors.openingTime}
-                  />}
+                  renderInput={(props) => (
+                    <TextField
+                      {...props}
+                      fullWidth
+                      error={
+                        formik.touched.openingTime &&
+                        Boolean(formik.errors.openingTime)
+                      }
+                      helperText={
+                        formik.touched.openingTime && formik.errors.openingTime
+                      }
+                    />
+                  )}
                 />
               </LocalizationProvider>
             </Grid>
@@ -266,15 +249,21 @@ const CreateRestaurantForm = () => {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <TimePicker
                   label="Closing Time"
-                  value={formik.values.closingTime} // Ensure this is a dayjs object or null
+                  value={formik.values.closingTime}
                   onChange={(time) => handleTimeChange(time, "closingTime")}
-                  renderInput={(props) => 
-                  <TextField 
-                    {...props} 
-                    fullWidth
-                    error={formik.touched.closingTime && Boolean(formik.errors.closingTime)}
-                    helperText={formik.touched.closingTime && formik.errors.closingTime}
-                  />}
+                  renderInput={(props) => (
+                    <TextField
+                      {...props}
+                      fullWidth
+                      error={
+                        formik.touched.closingTime &&
+                        Boolean(formik.errors.closingTime)
+                      }
+                      helperText={
+                        formik.touched.closingTime && formik.errors.closingTime
+                      }
+                    />
+                  )}
                 />
               </LocalizationProvider>
             </Grid>
@@ -288,8 +277,13 @@ const CreateRestaurantForm = () => {
                 onChange={formik.handleChange}
                 value={formik.values.streetAddress}
                 onBlur={formik.handleBlur}
-                error={formik.touched.streetAddress && Boolean(formik.errors.streetAddress)}
-                helperText={formik.touched.streetAddress && formik.errors.streetAddress}
+                error={
+                  formik.touched.streetAddress &&
+                  Boolean(formik.errors.streetAddress)
+                }
+                helperText={
+                  formik.touched.streetAddress && formik.errors.streetAddress
+                }
               />
             </Grid>
             <Grid item xs={4}>
@@ -316,8 +310,13 @@ const CreateRestaurantForm = () => {
                 onChange={formik.handleChange}
                 value={formik.values.stateProvince}
                 onBlur={formik.handleBlur}
-                error={formik.touched.stateProvince && Boolean(formik.errors.stateProvince)}
-                helperText={formik.touched.stateProvince && formik.errors.stateProvince}
+                error={
+                  formik.touched.stateProvince &&
+                  Boolean(formik.errors.stateProvince)
+                }
+                helperText={
+                  formik.touched.stateProvince && formik.errors.stateProvince
+                }
               />
             </Grid>
             <Grid item xs={4}>
@@ -330,8 +329,12 @@ const CreateRestaurantForm = () => {
                 onChange={formik.handleChange}
                 value={formik.values.postalCode}
                 onBlur={formik.handleBlur}
-                error={formik.touched.postalCode && Boolean(formik.errors.postalCode)}
-                helperText={formik.touched.postalCode && formik.errors.postalCode}
+                error={
+                  formik.touched.postalCode && Boolean(formik.errors.postalCode)
+                }
+                helperText={
+                  formik.touched.postalCode && formik.errors.postalCode
+                }
               />
             </Grid>
             <Grid item xs={12}>
@@ -386,7 +389,9 @@ const CreateRestaurantForm = () => {
                 onChange={formik.handleChange}
                 value={formik.values.facebook}
                 onBlur={formik.handleBlur}
-                error={formik.touched.facebook && Boolean(formik.errors.facebook)}
+                error={
+                  formik.touched.facebook && Boolean(formik.errors.facebook)
+                }
                 helperText={formik.touched.facebook && formik.errors.facebook}
               />
             </Grid>
@@ -400,7 +405,9 @@ const CreateRestaurantForm = () => {
                 onChange={formik.handleChange}
                 value={formik.values.instagram}
                 onBlur={formik.handleBlur}
-                error={formik.touched.instagram && Boolean(formik.errors.instagram)}
+                error={
+                  formik.touched.instagram && Boolean(formik.errors.instagram)
+                }
                 helperText={formik.touched.instagram && formik.errors.instagram}
               />
             </Grid>

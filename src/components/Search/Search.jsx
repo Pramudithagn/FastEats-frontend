@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { PopularCuisines } from "./PopularCuisines";
 import SearchDishCard from "./SearchDishCard";
@@ -6,17 +6,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { searchFoodItem } from "../state/food/Action";
 import { topMeals } from "../Home/topMeals";
 
-const dish = [1, 1, 1, 1];
-
 const Search = () => {
   const dispatch = useDispatch();
   const { food, auth } = useSelector((store) => store);
-  const jwt=localStorage.getItem("jwt")
+  const jwt = localStorage.getItem("jwt");
 
   const handleSearchFood = (keyword) => {
-    dispatch(searchFoodItem({keyword,jwt:auth.jwt || jwt }));
+    dispatch(searchFoodItem({ keyword, jwt: auth.jwt || jwt }));
   };
-  
+
   return (
     <div className="px-5 lg:px-[18vw]">
       <div className="relative py-5">

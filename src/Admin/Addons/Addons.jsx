@@ -43,7 +43,7 @@ const Addons = () => {
   const { auth, restaurant, addon } = useSelector((store) => store);
   const jwt = localStorage.getItem("jwt");
 
-  console.log("ing",addon);
+  console.log("ing", addon);
   const [openAddonCategory, setOpenAddonCategory] = useState(false);
   const handleOpenAddonCategory = () => setOpenAddonCategory(true);
   const handleCloseAddonCategory = () => setOpenAddonCategory(false);
@@ -59,7 +59,7 @@ const Addons = () => {
   return (
     <div className="px-2">
       <Grid container spacing={1}>
-        <Grid  item xs={12} lg={8}>
+        <Grid item xs={12} lg={8}>
           <Card className="mt-2 lg:ml-4">
             <CardHeader
               title={"Items"}
@@ -101,7 +101,9 @@ const Addons = () => {
                       <TableCell>{item?.id}</TableCell>
 
                       <TableCell className="">{item.name}</TableCell>
-                      <TableCell className="">{item.addonCategory.name}</TableCell>
+                      <TableCell className="">
+                        {item.addonCategory.name}
+                      </TableCell>
 
                       <TableCell className="">
                         <Button
@@ -171,7 +173,6 @@ const Addons = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         className="mx-20"
-        
       >
         <Box sx={style}>
           <CreateAddonForm handleClose={handleCloseAddon} />
@@ -185,13 +186,11 @@ const Addons = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <CreateAddonCategoryForm
-            handleClose={handleCloseAddonCategory}
-          />
+          <CreateAddonCategoryForm handleClose={handleCloseAddonCategory} />
         </Box>
       </Modal>
     </div>
   );
 };
 
-export default Addons
+export default Addons;

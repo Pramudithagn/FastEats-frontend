@@ -1,63 +1,9 @@
-// import { Avatar, Badge, IconButton } from "@mui/material";
-// import SearchIcon from "@mui/icons-material/Search";
-// import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-// import React from "react";
-// import { pink } from "@mui/material/colors";
-// import "./NavBar.css";
-// import { Person } from "@mui/icons-material";
-// import { useNavigate } from "react-router-dom";
-// import { useSelector } from "react-redux";
-
-// export const NavBar = () => {
-
-//   const {auth, cart} = useSelector((store) => store)
-//   const navigate = useNavigate()
-
-//   const handleAvatarClick = () =>{
-//     if(auth.user?.role === "ROLE_CUSTOMER"){
-//       navigate('/my-profile')
-//     }
-//     else{
-//       navigate('/admin/restaurant')
-//     }
-//   }
-
-//   return (
-//     <div className="px-5 top-0 sticky z-50 py-[.8rem] bg-[#e91e63] lg:px-20 flex justify-between">
-//       <div className="lg:mr-10 cursor-pointer flex items-center space-x-4">
-//         <li className="logo font-semibold text-gray-300 text-2xl" onClick={() => navigate("/")}>food</li>
-//       </div>
-//       <div className="flex items-center space-x-2 lg:space-x-10">
-//         <div className="">
-//           <IconButton>
-//             <SearchIcon sx={{ fontSize: "1.5rem" }}></SearchIcon>
-//           </IconButton>
-//         </div>
-//         <div className="">
-//           {auth.user? <Avatar onClick={handleAvatarClick} sx={{ bgcolor: "white", color: pink.A400 }}>{auth.user.fullName[0].toUpperCase()}</Avatar>:
-//                 <IconButton onClick={() => navigate("/account/login")}>
-//                   <Person/>
-//                 </IconButton>}
-//         </div>
-//         <div className="">
-//           <IconButton onClick={() => navigate("/cart")}>
-//             <Badge color="primary" badgeContent={cart?.cartItems?.length}>
-//               <ShoppingCartIcon sx={{ fontSize: "1.5rem" }}></ShoppingCartIcon>
-//             </Badge>
-//           </IconButton>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../NavBar/NavBar.css";
 import PersonIcon from "@mui/icons-material/Person";
 import {
   Avatar,
   Badge,
-  Button,
   IconButton,
   Menu,
   MenuItem,
@@ -65,17 +11,16 @@ import {
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
-import MenuIcon from '@mui/icons-material/Menu';
-import { useLocation, useNavigate } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useNavigate } from "react-router-dom";
 import Auth from "../Auth/Auth";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../state/auth/Action";
-import { grey, pink } from "@mui/material/colors";
-import HomeIcon from '@mui/icons-material/Home';
+import { grey } from "@mui/material/colors";
+import HomeIcon from "@mui/icons-material/Home";
 
-const Navbar = ({handleOpenSide}) => {
+const Navbar = ({ handleOpenSide }) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const { auth, cart } = useSelector((store) => store);
   const dispatch = useDispatch();
 
@@ -93,8 +38,7 @@ const Navbar = ({handleOpenSide}) => {
   };
 
   const navigateToProfile = (e) => {
-    e.preventDefault()
-    // auth.user?.role === "ROLE_ADMIN" || 
+    e.preventDefault();
     auth.user?.role === "ROLE_OWNER"
       ? navigate("/admin/restaurant")
       : navigate("/my-profile/");
@@ -107,13 +51,6 @@ const Navbar = ({handleOpenSide}) => {
     navigate("/");
   };
 
-  // useEffect(()=>{
-  //   if(auth.user?.fullName){
-  //     // handleCloseAuthModel()
-  //   }
-
-  // },[auth.user])
-
   const handleLogout = () => {
     dispatch(logout());
     handleCloseMenu();
@@ -124,18 +61,17 @@ const Navbar = ({handleOpenSide}) => {
   return (
     <div className="px-5 sticky z-50 py-[.8rem] bg-[#212529]  lg:px-20 flex justify-between">
       <div className="flex items-center space-x-4">
-        <div
-          // onClick={navigateToHome}
-          className="lg:mr-10 cursor-pointer flex items-center space-x-4"
-        >
-          {/* <li className="logo font-semibold text-gray-300 text-2xl">
-            Food-Home
-          </li> */}
-          {isSmallScreen? <IconButton onClick={handleOpenSide}><MenuIcon/></IconButton>
-                // :<li onClick={navigateToHome} className="logo font-semibold text-gray-300 text-2xl">Food-Home</li>}
-                :<IconButton onClick={navigateToHome}><HomeIcon/></IconButton>}
+        <div className="lg:mr-10 cursor-pointer flex items-center space-x-4">
+          {isSmallScreen ? (
+            <IconButton onClick={handleOpenSide}>
+              <MenuIcon />
+            </IconButton>
+          ) : (
+            <IconButton onClick={navigateToHome}>
+              <HomeIcon />
+            </IconButton>
+          )}
         </div>
-        {/* <li className="font font-semibold">Home</li> */}
       </div>
       <div className="flex items-center space-x-2 lg:space-x-10">
         <div className="">
@@ -157,7 +93,10 @@ const Navbar = ({handleOpenSide}) => {
               }
               className=" font-semibold cursor-pointer"
             >
-              <Avatar sx={{ bgcolor: "white",color:grey.A700}} className="bg-white">
+              <Avatar
+                sx={{ bgcolor: "white", color: grey.A700 }}
+                className="bg-white"
+              >
                 {auth.user.fullName[0].toUpperCase()}
               </Avatar>
             </span>

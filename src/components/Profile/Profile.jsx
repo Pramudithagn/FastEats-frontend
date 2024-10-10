@@ -9,16 +9,11 @@ import CustomerEvents from "./CustomerEvents";
 import { Payments } from "./Payments";
 import { Notifications } from "./Notifications";
 
-export const Profile = ({handleCloseSide, openSideBar}) => {
-  console.log("sidebar state",openSideBar)
-  // const [openSideBar, setOpenSideBar] = React.useState(false);
-
+export const Profile = ({ handleCloseSide, openSideBar }) => {
   return (
     <div className="lg:flex justify-center">
       <div onClick={handleCloseSide} className="sticky lg:h-[80vh] lg:w-[0%]">
-        {/* <ProfileNavigation open={openSideBar} /> */}
         <ProfileNavigation open={openSideBar} />
-
       </div>
       <div className="lg:w-[80%] h-lvh">
         <Routes>

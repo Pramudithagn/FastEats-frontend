@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-// import OrdersTable from "./OrderTable";
 import {
   Card,
   FormControl,
@@ -8,7 +7,7 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import OrderTable from "./OrderTable";
 import { fetchRestaurantsOrder } from "../../components/state/restaurant.order/Action";
@@ -16,8 +15,6 @@ import { fetchRestaurantsOrder } from "../../components/state/restaurant.order/A
 const orderStatus = [
   { label: "Pending", value: "PENDING" },
   { label: "Completed", value: "COMPLETED" },
-  // { label: "Out For Delivery", value: "OUT_FOR_DELIVERY" },
-  // { label: "Delivered", value: "DELIVERED" },
   { label: "All", value: "all" },
 ];
 
@@ -25,7 +22,6 @@ const RestaurantsOrder = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { id } = useParams();
   const jwt = localStorage.getItem("jwt");
   const { restaurant, auth } = useSelector((store) => store);
 
@@ -48,13 +44,12 @@ const RestaurantsOrder = () => {
 
     if (value === "all") {
       searchParams.delete("order_status");
-    } 
-    else searchParams.set("order_status", e.target.value);
+    } else searchParams.set("order_status", e.target.value);
 
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
   };
-  
+
   return (
     <div className="px-2">
       <Card className="p-5">

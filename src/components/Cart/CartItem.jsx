@@ -3,17 +3,12 @@ import React from "react";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { removeCartItem, updateCartItem } from "../state/cart/Action";
 
-export const CartItem = ({item}) => {
-  
-  const {auth, cart} = useSelector((store) => store)
-  const navigate = useNavigate()
+export const CartItem = ({ item }) => {
+  const { auth } = useSelector((store) => store);
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
-
-  // console.log("cart itemmmmmm",item)
 
   const handleUpdateCartItem = (value) => {
     if (value === -1 && item.quantity === 1) {
@@ -41,28 +36,27 @@ export const CartItem = ({item}) => {
         <div className="flex items-center justify-between lg:w-[70%]">
           <div className="space-y-1 lg:space-y-3 w-full ">
             <p className="">{item.food.name}</p>
-            
-              <div className="flex justify-between items-center">
-                <div className="flex items-center space-x-1">
-                  <IconButton
-                    onClick={() => handleUpdateCartItem(-1)}
-                    color="blue"
-                  >
-                    <RemoveCircleOutlineIcon />
-                  </IconButton>
-                  <div className="w-5 h-5 text-xs flex items-center justify-center ">
-                    {item.quantity}
-                  </div>
 
-                  <IconButton
-                    onClick={() => handleUpdateCartItem(1)}
-                    color="blue"
-                  >
-                    <AddCircleOutlineIcon />
-                  </IconButton>
+            <div className="flex justify-between items-center">
+              <div className="flex items-center space-x-1">
+                <IconButton
+                  onClick={() => handleUpdateCartItem(-1)}
+                  color="blue"
+                >
+                  <RemoveCircleOutlineIcon />
+                </IconButton>
+                <div className="w-5 h-5 text-xs flex items-center justify-center ">
+                  {item.quantity}
                 </div>
+
+                <IconButton
+                  onClick={() => handleUpdateCartItem(1)}
+                  color="blue"
+                >
+                  <AddCircleOutlineIcon />
+                </IconButton>
               </div>
-            
+            </div>
           </div>
           <p>${item.totalPrice}</p>
         </div>
@@ -70,11 +64,9 @@ export const CartItem = ({item}) => {
 
       <div className="pt-3 space-x-2">
         {item.addons?.map((addon) => (
-
           <Chip label={addon} />
         ))}
       </div>
-
     </div>
   );
 };

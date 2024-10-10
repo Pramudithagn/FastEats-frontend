@@ -2,23 +2,19 @@ import * as React from "react";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
 import { useMediaQuery } from "@mui/material";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
-import { Dashboard } from "@mui/icons-material";
-import AddIcon from "@mui/icons-material/Add";
 import PersonIcon from "@mui/icons-material/Person";
-import ShopTwoIcon from "@mui/icons-material/ShopTwo";
 import { logout } from "../components/state/auth/Action";
 import EventIcon from "@mui/icons-material/Event";
-import InfoIcon from '@mui/icons-material/Info';
-import CategoryIcon from '@mui/icons-material/Category';
-import FastfoodIcon from '@mui/icons-material/Fastfood';
-import DinnerDiningIcon from '@mui/icons-material/DinnerDining';
+import InfoIcon from "@mui/icons-material/Info";
+import CategoryIcon from "@mui/icons-material/Category";
+import FastfoodIcon from "@mui/icons-material/Fastfood";
+import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
 
 const menu = [
-  // { title: "Dashboard", icon: <Dashboard />, path: "/" },
   { title: "Profile", icon: <PersonIcon />, path: "/" },
   { title: "Orders", icon: <ShoppingBagIcon />, path: "/orders" },
   { title: "Foods", icon: <DinnerDiningIcon />, path: "/food" },
@@ -27,14 +23,11 @@ const menu = [
   { title: "Events", icon: <EventIcon />, path: "/event" },
   { title: "Details", icon: <InfoIcon />, path: "/details" },
   { title: "Logout", icon: <LogoutIcon />, path: "/" },
-  
 ];
 export default function AdminSidebar({ handleClose, open }) {
   const isSmallScreen = useMediaQuery("(max-width:1080px)");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {restaurant}=useSelector(store=>store);
-
 
   const handleNavigate = (item) => {
     navigate(`/admin/restaurant${item.path}`);
@@ -44,7 +37,7 @@ export default function AdminSidebar({ handleClose, open }) {
     } else if (item.title === "Restaurants") {
       navigate("/admin");
     }
-    handleClose()
+    handleClose();
   };
 
   return (
@@ -56,10 +49,8 @@ export default function AdminSidebar({ handleClose, open }) {
           open={open}
           onClose={handleClose}
           variant={isSmallScreen ? "temporary" : "permanent"}
-          // variant="persistent"
         >
           <div className="w-[70vw] lg:w-[20vw] group h-[100vh] flex flex-col justify-center text-xl space-y-[1.65rem]">
-            
             {menu.map((item, i) => (
               <>
                 <div
@@ -69,11 +60,10 @@ export default function AdminSidebar({ handleClose, open }) {
                   {item.icon}
                   <span>{item.title}</span>
                 </div>
-               {i!==menu.length-1 && <Divider />}
+                {i !== menu.length - 1 && <Divider />}
               </>
             ))}
           </div>
-
         </Drawer>
       </React.Fragment>
     </div>

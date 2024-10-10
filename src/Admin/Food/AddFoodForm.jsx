@@ -11,7 +11,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Alert,
   Box,
@@ -35,25 +35,6 @@ const MenuProps = {
   },
 };
 
-const validationSchema = Yup.object({
-  name: Yup.string().required("Name is required"),
-  description: Yup.string().required("Description is required"),
-  price: Yup.number()
-    .typeError("Price must be a number")
-    .required("Price is required")
-    .min(0, "Price must be greater than or equal to 0"),
-
-  imageUrl: Yup.string()
-    .url("Invalid URL format")
-    .required("Image URL is required"),
-  vegetarian: Yup.boolean().required("Is Vegetarian is required"),
-  seasonal: Yup.boolean().required("Is Gluten Free is required"),
-  quantity: Yup.number()
-    .typeError("Quantity must be a number")
-    .required("Quantity is required")
-    .min(0, "Quantity must be greater than or equal to 0"),
-});
-
 const initialValues = {
   name: "",
   description: "",
@@ -69,11 +50,10 @@ const initialValues = {
 
 const AddFoodForm = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
-  const { restaurant, addon, auth ,food} = useSelector((store) => store);
+  const { restaurant, addon, auth, food } = useSelector((store) => store);
   const [uploadImage, setUploadingImage] = useState("");
   const jwt = localStorage.getItem("jwt");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues,
@@ -81,8 +61,7 @@ const AddFoodForm = () => {
       values.restaurantId = restaurant.usersRestaurant.id;
 
       dispatch(createFoodItem({ food: values, jwt: auth.jwt || jwt }));
-      console.log("values ----- ", values);
-      navigate('/admin/restaurant/food')
+      navigate("/admin/restaurant/food");
     },
   });
 
@@ -104,7 +83,7 @@ const AddFoodForm = () => {
 
   useEffect(() => {
     if (food.message || food.error) setOpenSnackBar(true);
-  }, [food.message,food.error]);
+  }, [food.message, food.error]);
 
   const handleCloseSnackBar = () => {
     setOpenSnackBar(false);
@@ -114,9 +93,7 @@ const AddFoodForm = () => {
     <>
       <div className="lg:px-32 px-5 lg:flex  justify-center min-h-screen items-center pb-5">
         <div>
-          <h1 className="font-bold text-2xl text-center py-2">
-            Add New Food
-          </h1>
+          <h1 className="font-bold text-2xl text-center py-2">Add New Food</h1>
           <form onSubmit={formik.handleSubmit} className="space-y-4 ">
             <Grid container spacing={2}>
               <Grid className="flex flex-wrap gap-5" item xs={12}>
@@ -228,9 +205,7 @@ const AddFoodForm = () => {
 
               <Grid item xs={12}>
                 <FormControl fullWidth>
-                  <InputLabel id="addon-multiple-chip-label">
-                    Addons
-                  </InputLabel>
+                  <InputLabel id="addon-multiple-chip-label">Addons</InputLabel>
                   <Select
                     labelId="addon-multiple-chip-label"
                     id="addon-multiple-chip"
@@ -239,10 +214,7 @@ const AddFoodForm = () => {
                     value={formik.values.addons}
                     onChange={formik.handleChange}
                     input={
-                      <OutlinedInput
-                        id="select-multiple-chip"
-                        label="Addons"
-                      />
+                      <OutlinedInput id="select-multiple-chip" label="Addons" />
                     }
                     renderValue={(selected) => (
                       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
@@ -254,11 +226,7 @@ const AddFoodForm = () => {
                     MenuProps={MenuProps}
                   >
                     {addon.addons?.map((item) => (
-                      <MenuItem
-                        key={item.id}
-                        value={item}
-                        // style={getStyles(name, personName, theme)}
-                      >
+                      <MenuItem key={item.id} value={item}>
                         {item.name}
                       </MenuItem>
                     ))}
@@ -296,21 +264,6 @@ const AddFoodForm = () => {
                   </Select>
                 </FormControl>
               </Grid>
-              {/* <Grid item xs={6}>
-              <FormControl fullWidth variant="outlined">
-                <InputLabel htmlFor="isVegan">Is Vegan</InputLabel>
-                <Select
-                  id="isVegan"
-                  name="isVegan"
-                  label="Is Vegan"
-                  onChange={formik.handleChange}
-                  value={formik.values.isVegan}
-                >
-                  <MenuItem value={true}>Yes</MenuItem>
-                  <MenuItem value={false}>No</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid> */}
             </Grid>
             <Button variant="contained" color="secondary" type="submit">
               Create Food
@@ -324,7 +277,6 @@ const AddFoodForm = () => {
         open={openSnackBar}
         autoHideDuration={3000}
         onClose={handleCloseSnackBar}
-        // handleClose={handleCloseSnackBar}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <Alert

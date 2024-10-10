@@ -10,20 +10,20 @@ import { addonReducer } from "./addon/Reducer";
 import { LOGOUT } from "./auth/ActionType";
 
 const appReducer = combineReducers({
-    auth: authReducer,
-    restaurant: restaurantReducer,
-    food: foodItemReducer,
-    cart: cartReducer,
-    order: orderReducer,
-    restaurantOrder: restaurantsOrderReducer,
-    addon: addonReducer
-})
+  auth: authReducer,
+  restaurant: restaurantReducer,
+  food: foodItemReducer,
+  cart: cartReducer,
+  order: orderReducer,
+  restaurantOrder: restaurantsOrderReducer,
+  addon: addonReducer,
+});
 
 const rootReducer = (state, action) => {
-    if (action.type === LOGOUT) {
-        state = undefined;
-    }
-    return appReducer(state, action);
-}
+  if (action.type === LOGOUT) {
+    state = undefined;
+  }
+  return appReducer(state, action);
+};
 
-export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
+export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
